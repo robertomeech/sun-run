@@ -28,9 +28,7 @@ class App extends React.Component {
       }
      
     render() {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            console.log(position.coords.latitude, position.coords.longitude);
-        });
+        
       return (
         <div>
           <button onClick={this.handleClick}>Show my location</button>

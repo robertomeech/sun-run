@@ -4,28 +4,26 @@ import ReactDOM from 'react-dom';
 class App extends React.Component {
     constructor() {
       super();
+      this.state = {
+        latitude: '',
+        longitude: ''
+      }
+      this.handleClick = this.handleClick.bind(this)
     }
 
 
     handleClick(e) {
       e.preventDefault();
+
       function success(position) {
-        var latitude = position.coords.latitude;
-        console.log(latitude);
-        var longitude = position.coords.longitude;
-        console.log(longitude);
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
       }
 
       navigator.geolocation.getCurrentPosition(success);
-    }
 
-   
-        
-      
-        
-    
-
-
+      }
+     
     render() {
       return (
         <div>

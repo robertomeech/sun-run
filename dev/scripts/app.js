@@ -4,19 +4,22 @@ import ReactDOM from 'react-dom';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
 
 
+
 class App extends React.Component {
     constructor() {
       super();
       this.state = {
         date: new Date()
       }
+      this.onChange = this.onChange.bind(this);
     }
+
 
     // onChange = date => this.setState({ date })
 
-    onChange(date) {
+    onChange(dateClicked) {
       this.setState({
-        date: Date(date)
+        date: dateClicked
       })
     }
 
@@ -37,10 +40,17 @@ class App extends React.Component {
 
      
     render() {
+        
       return (
         <div>
           {/* <button onClick={this.handleClick}>Show my location</button> */}
           <div id="out">Testing</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+
           <DatePicker
             onChange={this.onChange}
             value={this.state.date}

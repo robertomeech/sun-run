@@ -28,7 +28,8 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "googleapis": "^27.0.0",
-    "node-sass": "^4.7.1"
+    "cordova-plugin-geolocation": "^4.0.1",
+    "node-sass": "^4.7.1",
+    "react-date-picker": "^6.10.1"
   }
 }

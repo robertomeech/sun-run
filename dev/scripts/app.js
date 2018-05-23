@@ -11,13 +11,15 @@ class App extends React.Component {
       this.state = {
         date: new Date()
       }
+      this.onChange = this.onChange.bind(this);
     }
+
 
     // onChange = date => this.setState({ date })
 
-    onChange(date) {
+    onChange(dateClicked) {
       this.setState({
-        date: Date(date)
+        date: dateClicked
       })
     }
 
@@ -43,6 +45,12 @@ class App extends React.Component {
         <div>
           {/* <button onClick={this.handleClick}>Show my location</button> */}
           <div id="out">Testing</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+
           <DatePicker
             onChange={this.onChange}
             value={this.state.date}

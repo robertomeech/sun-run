@@ -10,15 +10,17 @@ class App extends React.Component {
       this.state = {
         date: new Date()
       }
+      this.onChange = this.onChange.bind(this);
     }
 
     // onChange = date => this.setState({ date })
 
-    onChange(date) {
+    onChange(dateClicked) {
       this.setState({
-        date: Date(date)
+        date: dateClicked
       })
     }
+    
 
     componentDidMount() {
        function success(position) {
@@ -26,10 +28,6 @@ class App extends React.Component {
         console.log(latitude)
         let longitude = position.coords.longitude;
         console.log(longitude)
-
-
-
-        
       }
 
       navigator.geolocation.getCurrentPosition(success);

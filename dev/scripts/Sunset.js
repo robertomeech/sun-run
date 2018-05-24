@@ -20,23 +20,9 @@ class Sunset extends React.Component {
         let sunset = this.props.sunsetTime.split(':')
     }
 
-    
-
-   
-
     renderer(hours, minutes, seconds) {
         return <span>{hours}:{minutes}:{seconds}</span>;
     }
-    
-    // renderer(({ hours, minutes, seconds, completed }) => {
-
-
-    // })
-
-    
-
-    
-
     
 
     render() {

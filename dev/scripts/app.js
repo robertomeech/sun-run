@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
+import{BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import Sunrise from './Sunrise.js';
 import axios from 'axios';
+
+
 
 
 class App extends React.Component {
@@ -13,15 +17,25 @@ class App extends React.Component {
         longitude:'',
         sunsetTime:''
       }
+
     this.onChange = this.onChange.bind(this)
     this.success = this.success.bind(this)
     this.getAxios = this.getAxios.bind(this)
     }
 
+      this.onChange = this.onChange.bind(this);
+    }
+
+
+    // onChange = date => this.setState({ date })
+
     onChange(dateClicked) {
       this.setState({
         date: dateClicked
       })
+
+    }
+
 
       this.getAxios()
       // navigator.geolocation.getCurrentPosition(this.success);
@@ -85,15 +99,33 @@ class App extends React.Component {
       navigator.geolocation.getCurrentPosition(this.success);
       // this.getAxios()
     }
+    handleSunrise(){
+        console.log("click")
+    }
 
     render() {
+        
       return (
         <div>
           {/* <button onClick={this.handleClick}>Show my location</button> */}
+
+          <div id="out">Testing</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
           <DatePicker
             onChange={this.onChange}
             value={this.state.date}
           />
+        <Router>
+            <div>
+                <Link to='/Sunrise'>Sunrise</Link>
+                <Route path='/Sunrise' component={Sunrise} />
+            </div>
+        </Router>
+
         </div>
       )
     }

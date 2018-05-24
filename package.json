@@ -30,6 +30,10 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 676236b1ca6ebff76c7f3fe57fe1af1f9fdd69d4
     "connect-history-api-fallback": "^1.5.0",
     "node-sass": "^4.7.1",
     "react-date-picker": "^6.10.1",

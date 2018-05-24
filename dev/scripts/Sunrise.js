@@ -1,6 +1,10 @@
 import React from 'react';
+
+import axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
-import { compose, withProps } from "recompose";
+import{compose, withProps} from 'recompose';
+
+
 
 
 
@@ -18,7 +22,7 @@ const MyMapComponent = compose(
     withGoogleMap
 )((props) =>
     <GoogleMap
-        defaultZoom={8}
+        defaultZoom={1}
         defaultCenter={{ lat: -34.397, lng: 150.644 }}
     >
         {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}

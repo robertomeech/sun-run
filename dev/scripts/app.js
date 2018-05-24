@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // const DatePicker = require('react-date-picker');
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
+import{BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import Sunrise from './Sunrise.js';
 
 
 
@@ -22,6 +24,7 @@ class App extends React.Component {
         date: dateClicked
       })
     }
+    
 
     componentDidMount() {
        function success(position) {
@@ -36,6 +39,9 @@ class App extends React.Component {
       }
 
       navigator.geolocation.getCurrentPosition(success);
+    }
+    handleSunrise(){
+        console.log("click")
     }
 
      
@@ -55,6 +61,13 @@ class App extends React.Component {
             onChange={this.onChange}
             value={this.state.date}
           />
+        <Router>
+            <div>
+                <Link to='/Sunrise'>Sunrise</Link>
+                <Route path='/Sunrise' component={Sunrise} />
+            </div>
+        </Router>
+
         </div>
       )
     }

@@ -91,6 +91,7 @@ class Sunrise extends React.Component {
 
         return(
             <div>
+                <p>The sunrise will be at {this.props.sunriseTime}</p>
                 <form action="#">
                     <input type="text" placeholder="enter a landmark?"/>
                 </form>

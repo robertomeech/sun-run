@@ -52,15 +52,25 @@ class App extends React.Component {
           // correcting the sunrise/sunset times so that they are no longer in UTC
 
           let sunsetTime = res.data.results.sunset
+          console.log(sunsetTime)
           let splitSunsetTime = sunsetTime.split(':')[0]
+          console.log(splitSunsetTime)
           let splitSunsetMinute = sunsetTime.split(':')[1]
+          console.log(splitSunsetMinute);
+          
           let userDate = Date();
           let splitDate =  userDate.split(' ');
-          splitDate.pop();
-          let newSplit = splitDate.pop();
-          let newSplit2 = newSplit.split('-')
+          console.log(splitDate)
+          let timeOne = splitDate.splice(5,1)
+          console.log(timeOne)
+        console.log(typeof(timeOne))
+          let newSplit2 = timeOne[0].split('-');
+          console.log(newSplit2);
+          
           let newSplit3 = newSplit2.pop();
+          console.log(newSplit3)
           let newSplit4 = newSplit3.split('0')[1]
+        //   console.log(newSplit4)
           let correctHour = splitSunsetTime - newSplit4  
 
           let correctSunsetTime = correctHour + `:` + splitSunsetMinute + `PM`

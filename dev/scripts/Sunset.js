@@ -1,4 +1,5 @@
 import React from 'react';
+import Countdown from 'react-countdown-now';
 
 class Sunset extends React.Component {
     constructor() {
@@ -21,7 +22,25 @@ class Sunset extends React.Component {
 
     
 
+   
+
+    renderer(hours, minutes, seconds) {
+        return <span>{hours}:{minutes}:{seconds}</span>;
+    }
+    
+    // renderer(({ hours, minutes, seconds, completed }) => {
+
+
+    // })
+
+    
+
+    
+
+    
+
     render() {
+
         return (
             <div>
                 <p>The Sunset will be at {this.props.sunsetTime}</p>

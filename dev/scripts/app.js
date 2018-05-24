@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import{BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Sunrise from './Sunrise.js';
+import Sunset from './Sunset.js'
 import axios from 'axios';
 
 
@@ -15,15 +16,14 @@ class App extends React.Component {
         date: new Date(),
         latitude:'',
         longitude:'',
-        sunsetTime:''
+        sunsetTime:'',
+        sunriseTime:''
       }
 
     this.onChange = this.onChange.bind(this)
     this.success = this.success.bind(this)
     this.getAxios = this.getAxios.bind(this)
-    }
-
-      this.onChange = this.onChange.bind(this);
+    this.onChange = this.onChange.bind(this);
     }
 
 
@@ -34,7 +34,7 @@ class App extends React.Component {
         date: dateClicked
       })
 
-    }
+    
 
 
       this.getAxios()
@@ -51,8 +51,6 @@ class App extends React.Component {
         }
       })
         .then((res) => {
-          // console.log(res.data)
-
           // correcting the sunrise/sunset times so that they are no longer in UTC
 
           let sunsetTime = res.data.results.sunset
@@ -68,17 +66,19 @@ class App extends React.Component {
           let correctHour = splitSunsetTime - newSplit4  
 
           let correctSunsetTime = correctHour + `:` + splitSunsetMinute + `PM`
-          console.log(correctSunsetTime)
 
           let sunriseTime = res.data.results.sunrise
+          let splitSunriseTime = sunriseTime.split(':')[0]
+          let splitSunriseMinute = sunriseTime.split(':')[1]
+
+          let correctSunriseHour = splitSunriseTime - newSplit4
+
+          let correctSunriseTime = correctSunriseHour + `:` + splitSunriseMinute + `AM`
 
           this.setState({
-            sunsetTime: correctSunsetTime
+            sunsetTime: correctSunsetTime,
+            sunriseTime: correctSunriseTime
           })
-
-
-          
-
         })
     }
 
@@ -99,19 +99,18 @@ class App extends React.Component {
       navigator.geolocation.getCurrentPosition(this.success);
       // this.getAxios()
     }
-    handleSunrise(){
-        console.log("click")
-    }
-
+  
     render() {
+
+      
         
       return (
         <div>
           {/* <button onClick={this.handleClick}>Show my location</button> */}
 
           <div id="out">Testing</div>
-          <div>.</div>
-          <div>.</div>
+          <div></div>
+          <div></div>
           <div>.</div>
           <div>.</div>
           <div>.</div>
@@ -121,15 +120,25 @@ class App extends React.Component {
           />
         <Router>
             <div>
-                <Link to='/Sunrise'>Sunrise</Link>
-                <Route path='/Sunrise' component={Sunrise} />
+              <Link to='/Sunrise'>Sunrise</Link>
+              <Route path='/Sunrise' render={()=> 
+                   <Sunrise sunriseTime={this.state.sunriseTime} />
+              }/>
+
+              <Link to='/Sunset'>Sunset</Link>
+              <Route path='/Sunset' render={() =>
+                <Sunset sunsetTime={this.state.sunsetTime}/>
+              } />
             </div>
         </Router>
-
+       
+          
+      
         </div>
       )
     }
 }
+
 
 
 

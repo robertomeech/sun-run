@@ -63,7 +63,6 @@ class App extends React.Component {
       return (
         <div>
           {/* <button onClick={this.handleClick}>Show my location</button> */}
-          <div id="out">Testing</div>
           <DatePicker
             onChange={this.onChange}
             value={this.state.date}

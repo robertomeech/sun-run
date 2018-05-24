@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
-import{BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import{BrowserRouter as Router, Route, Link, } from 'react-router-dom';
 import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js'
 import axios from 'axios';
@@ -19,12 +19,10 @@ class App extends React.Component {
         sunriseTime:''
       }
 
-
     this.onChange = this.onChange.bind(this);
     this.success = this.success.bind(this);
     this.getAxios = this.getAxios.bind(this);
     this.onChange = this.onChange.bind(this);
-
     }
 
 

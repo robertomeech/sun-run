@@ -4,6 +4,7 @@ import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import axios from 'axios';
 
 
+
 class App extends React.Component {
     constructor() {
       super();
@@ -12,11 +13,18 @@ class App extends React.Component {
         latitude:'',
         longitude:''
       }
+
     this.onChange = this.onChange.bind(this)
     this.success = this.success.bind(this)
     this.getAxios = this.getAxios.bind(this)
     // this.axiosCall = this.axiosCall.bind(this)
     }
+
+      this.onChange = this.onChange.bind(this);
+    }
+
+
+    // onChange = date => this.setState({ date })
 
     onChange(dateClicked) {
       this.setState({
@@ -60,9 +68,17 @@ class App extends React.Component {
     }
 
     render() {
+        
       return (
         <div>
           {/* <button onClick={this.handleClick}>Show my location</button> */}
+
+          <div id="out">Testing</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
           <DatePicker
             onChange={this.onChange}
             value={this.state.date}

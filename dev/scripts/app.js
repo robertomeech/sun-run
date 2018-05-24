@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
+import{BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import Sunrise from './Sunrise.js';
 import axios from 'axios';
+
 
 
 
@@ -30,6 +33,9 @@ class App extends React.Component {
       this.setState({
         date: dateClicked
       })
+
+    }
+
 
       this.getAxios()
       // navigator.geolocation.getCurrentPosition(this.success);
@@ -66,6 +72,9 @@ class App extends React.Component {
       console.log('hello???');
       // this.getAxios()
     }
+    handleSunrise(){
+        console.log("click")
+    }
 
     render() {
         
@@ -83,6 +92,13 @@ class App extends React.Component {
             onChange={this.onChange}
             value={this.state.date}
           />
+        <Router>
+            <div>
+                <Link to='/Sunrise'>Sunrise</Link>
+                <Route path='/Sunrise' component={Sunrise} />
+            </div>
+        </Router>
+
         </div>
       )
     }

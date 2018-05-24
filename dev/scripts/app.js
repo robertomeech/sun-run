@@ -18,12 +18,10 @@ class App extends React.Component {
         sunsetTime:''
       }
 
-    this.onChange = this.onChange.bind(this)
-    this.success = this.success.bind(this)
-    this.getAxios = this.getAxios.bind(this)
-    }
-
-      this.onChange = this.onChange.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.success = this.success.bind(this);
+    this.getAxios = this.getAxios.bind(this);
+    this.onChange = this.onChange.bind(this);
     }
 
 
@@ -33,8 +31,6 @@ class App extends React.Component {
       this.setState({
         date: dateClicked
       })
-
-    }
 
 
       this.getAxios()
@@ -130,6 +126,7 @@ class App extends React.Component {
       )
     }
 }
+
 
 
 

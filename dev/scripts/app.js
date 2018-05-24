@@ -10,12 +10,12 @@ class App extends React.Component {
       this.state = {
         date: new Date(),
         latitude:'',
-        longitude:''
+        longitude:'',
+        sunsetTime:''
       }
     this.onChange = this.onChange.bind(this)
     this.success = this.success.bind(this)
     this.getAxios = this.getAxios.bind(this)
-    // this.axiosCall = this.axiosCall.bind(this)
     }
 
     onChange(dateClicked) {
@@ -25,6 +25,7 @@ class App extends React.Component {
 
       this.getAxios()
       // navigator.geolocation.getCurrentPosition(this.success);
+      
     }
 
     getAxios(){
@@ -36,7 +37,34 @@ class App extends React.Component {
         }
       })
         .then((res) => {
-          console.log(res.data)
+          // console.log(res.data)
+
+          // correcting the sunrise/sunset times so that they are no longer in UTC
+
+          let sunsetTime = res.data.results.sunset
+          let splitSunsetTime = sunsetTime.split(':')[0]
+          let splitSunsetMinute = sunsetTime.split(':')[1]
+          let userDate = Date();
+          let splitDate =  userDate.split(' ');
+          splitDate.pop();
+          let newSplit = splitDate.pop();
+          let newSplit2 = newSplit.split('-')
+          let newSplit3 = newSplit2.pop();
+          let newSplit4 = newSplit3.split('0')[1]
+          let correctHour = splitSunsetTime - newSplit4  
+
+          let correctSunsetTime = correctHour + `:` + splitSunsetMinute + `PM`
+          console.log(correctSunsetTime)
+
+          let sunriseTime = res.data.results.sunrise
+
+          this.setState({
+            sunsetTime: correctSunsetTime
+          })
+
+
+          
+
         })
     }
 
@@ -55,7 +83,6 @@ class App extends React.Component {
 
     componentDidMount() {
       navigator.geolocation.getCurrentPosition(this.success);
-      console.log('hello???');
       // this.getAxios()
     }
 

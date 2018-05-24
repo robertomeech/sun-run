@@ -30,6 +30,7 @@
   "dependencies": {
     "cordova-plugin-geolocation": "^4.0.1",
     "node-sass": "^4.7.1",
-    "react-date-picker": "^6.10.1"
+    "react-date-picker": "^6.10.1",
+    "react-input-calendar": "^0.5.3"
   }
 }

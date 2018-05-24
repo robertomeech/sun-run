@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
-import{BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import{BrowserRouter as Router, Route, Link, } from 'react-router-dom';
 import Sunrise from './Sunrise.js';
 import axios from 'axios';
-
 
 
 
@@ -43,7 +42,8 @@ class App extends React.Component {
         params: {
           lat: this.state.latitude,
           lng: this.state.longitude,
-          date: this.state.date
+          date: this.state.date,
+        //   latAndLng: {this.state.lat},
         }
       })
         .then((res) => {
@@ -117,7 +117,7 @@ class App extends React.Component {
           />
         <Router>
             <div>
-                <Link to='/Sunrise'>Sunrise</Link>
+                <Link to='/Sunrise' lat={this.state.latitude} long={this.state.longitude}>Sunrise</Link>
                 <Route path='/Sunrise' component={Sunrise} />
             </div>
         </Router>

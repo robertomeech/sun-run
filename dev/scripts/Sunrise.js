@@ -1,10 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-import axios from 'axios';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
-import{compose, withProps} from 'recompose';
-
-=======
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { compose, withProps } from "recompose";
 
@@ -33,14 +27,13 @@ const MyMapComponent = compose(
 
 
     
->>>>>>> f6958ed8bf5f9d72a7857d18390bc30984246c05
 
 class Sunrise extends React.Component {
 
     constructor(){
         super();
         this.handleClick = this.handleClick.bind(this)
-        this.getLandmark = this.getLandmark.bind(this)
+        // this.getLandmark = this.getLandmark.bind(this)
     }
 
    

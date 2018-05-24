@@ -17,19 +17,10 @@ class App extends React.Component {
         sunsetTime:''
       }
 
-<<<<<<< HEAD
-    this.onChange = this.onChange.bind(this)
-    this.success = this.success.bind(this)
-    this.getAxios = this.getAxios.bind(this)
-    
-
-      this.onChange = this.onChange.bind(this);
-=======
     this.onChange = this.onChange.bind(this);
     this.success = this.success.bind(this);
     this.getAxios = this.getAxios.bind(this);
     this.onChange = this.onChange.bind(this);
->>>>>>> f6958ed8bf5f9d72a7857d18390bc30984246c05
     }
 
 

@@ -7,7 +7,6 @@ import axios from 'axios';
 
 
 
-
 class App extends React.Component {
     constructor() {
       super();
@@ -18,10 +17,12 @@ class App extends React.Component {
         sunsetTime:''
       }
 
+
     this.onChange = this.onChange.bind(this);
     this.success = this.success.bind(this);
     this.getAxios = this.getAxios.bind(this);
     this.onChange = this.onChange.bind(this);
+
     }
 
 
@@ -43,7 +44,8 @@ class App extends React.Component {
         params: {
           lat: this.state.latitude,
           lng: this.state.longitude,
-          date: this.state.date
+          date: this.state.date,
+        //   latAndLng: {this.state.lat},
         }
       })
         .then((res) => {
@@ -117,7 +119,7 @@ class App extends React.Component {
           />
         <Router>
             <div>
-                <Link to='/Sunrise'>Sunrise</Link>
+                <Link to='/Sunrise' lat={this.state.latitude} long={this.state.longitude}>Sunrise</Link>
                 <Route path='/Sunrise' component={Sunrise} />
             </div>
         </Router>

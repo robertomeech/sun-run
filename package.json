@@ -30,6 +30,8 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+
+    "connect-history-api-fallback": "^1.5.0",
     "node-sass": "^4.7.1",
     "react-date-picker": "^6.10.1",
     "react-google-maps": "^9.4.5",

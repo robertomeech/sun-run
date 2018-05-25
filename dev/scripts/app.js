@@ -237,56 +237,21 @@ class App extends React.Component {
                       <div>.</div>
                       <div>.</div>
                       <div>.</div>
-                      <DatePicker
-                          onChange={this.onChange}
-                          value={this.state.date}
-                      />
+                      <DatePicker onChange={this.onChange} value={this.state.date} />
                       <Router>
                           <div>
 
                               <Link to='/Sunrise'>Sunrise</Link>
-                              <Route path='/Sunrise' render={() =>
-                                  <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />
-                              } />
+                              <Route path='/Sunrise' render={() => <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
 
                               <Link to='/Sunset'>Sunset</Link>
-                              <Route path='/Sunset' render={() =>
-                                  <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime}/>
-                              } />
+                              <Route path='/Sunset' render={() => <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime}/> } />
                           </div>
                       </Router>
                   </div>}
-            
-              } />
             </div>
 
 
-          {/* <div>
-              <div id="out">Testing</div>
-              <div></div>
-              <div></div>
-              <div>.</div>
-              <div>.</div>
-              <div>.</div>
-              <DatePicker
-                onChange={this.onChange}
-                value={this.state.date}
-              />
-            <Router>
-                <div>
-    
-                  <Link to='/Sunrise'>Sunrise</Link>
-                  <Route path='/Sunrise' render={()=> 
-                    <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude}/>
-                  }/>
-    
-                  <Link to='/Sunset'>Sunset</Link>
-                  <Route path='/Sunset' render={() =>
-                    <Sunset sunsetTime={this.state.sunsetTime}/>
-                  } />
-                </div>
-            </Router>
-          </div> */}
        
           
       

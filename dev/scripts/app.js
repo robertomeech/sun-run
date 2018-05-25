@@ -6,6 +6,7 @@ import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js'
 import axios from 'axios';
 import firebase from 'firebase';
+import moment from 'moment'
 
 // Initialize Firebase
 const config = {
@@ -21,6 +22,7 @@ firebase.initializeApp(config);
 
 
 
+
 class App extends React.Component {
     constructor() {
       super();
@@ -30,12 +32,11 @@ class App extends React.Component {
         longitude:'',
         sunsetTime:'',
         sunriseTime:'',
-        loggedIn: false
-        // createEmail: '',
-        // createPassword: '',
-        // loginEmail: '',
-        // loginPassword: '',
-        // signedIn: false
+        loggedIn: false,
+        userDate:'',
+        month: '',
+        day: '',
+        year:''
       }
 
     this.onChange = this.onChange.bind(this);
@@ -53,14 +54,30 @@ class App extends React.Component {
     // onChange = date => this.setState({ date })
 
     onChange(dateClicked) {
+      
       this.setState({
-        date: dateClicked
+        date: dateClicked,
       })
 
-
       this.getAxios()
-      // navigator.geolocation.getCurrentPosition(this.success);
+
+      let month = dateClicked.getMonth() + 1
+
+      let year = dateClicked.getUTCFullYear();
+
+      let day = dateClicked.getDate();
+      // console.log(day);
+
+      this.setState({
+        month:month,
+        day:day,
+        year:year,
+        userDate: month + '-' + day + '-' + year
+      })
       
+      // let dateClick = dateClicked
+      
+      // navigator.geolocation.getCurrentPosition(this.success);      
     }
 
     handleChange(e, field) {
@@ -102,30 +119,31 @@ class App extends React.Component {
           lat: this.state.latitude,
           lng: this.state.longitude,
           date: this.state.date,
-        //   latAndLng: {this.state.lat},
         }
       })
         .then((res) => {
           // correcting the sunrise/sunset times so that they are no longer in UTC
 
           let sunsetTime = res.data.results.sunset
-          console.log(sunsetTime)
+          // console.log(sunsetTime)
           let splitSunsetTime = sunsetTime.split(':')[0]
-          console.log(splitSunsetTime)
+          // console.log(splitSunsetTime)
           let splitSunsetMinute = sunsetTime.split(':')[1]
-          console.log(splitSunsetMinute);
+          // console.log(splitSunsetMinute);
           
+          // isolating user date
           let userDate = Date();
+  
           let splitDate =  userDate.split(' ');
-          console.log(splitDate)
+          // console.log(splitDate)
           let timeOne = splitDate.splice(5,1)
-          console.log(timeOne)
-        console.log(typeof(timeOne))
+          // console.log(timeOne)
+        // console.log(typeof(timeOne))
           let newSplit2 = timeOne[0].split('-');
-          console.log(newSplit2);
+          // console.log(newSplit2);
           
           let newSplit3 = newSplit2.pop();
-          console.log(newSplit3)
+          // console.log(newSplit3)
           let newSplit4 = newSplit3.split('0')[1]
         //   console.log(newSplit4)
           let correctHour = splitSunsetTime - newSplit4  
@@ -233,11 +251,13 @@ class App extends React.Component {
 
                               <Link to='/Sunset'>Sunset</Link>
                               <Route path='/Sunset' render={() =>
-                                  <Sunset sunsetTime={this.state.sunsetTime} />
+                                  <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime}/>
                               } />
                           </div>
                       </Router>
                   </div>}
+            
+              } />
             </div>
 
 

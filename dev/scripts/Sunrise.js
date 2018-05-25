@@ -1,15 +1,10 @@
 import React from 'react';
-
 import axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsRenderer} from 'react-google-maps';
 import{compose, withProps, lifecycle} from 'recompose';
 import MapWithADirectionsRenderer from './Map.js'
 
 
-
-
-
-    
 
 class Sunrise extends React.Component {
 
@@ -19,29 +14,22 @@ class Sunrise extends React.Component {
         this.state={
             destination: "",
             finalDestination: "Toronto"
-            
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        // this.getLandmark = this.getLandmark.bind(this)
     }
-
-   
        
     handleChange(e){
         this.setState({
             [e.target.name]: e.target.value
         });
-        // console.log(e.target.value)
     }
     handleSubmit(e){
         e.preventDefault();
-
         const destClone = this.state.destination
         this.setState({
             finalDestination: destClone
         })
-
     }
 
 
@@ -50,7 +38,6 @@ class Sunrise extends React.Component {
     }
     render() {
        
-        
         console.log(this.state.finalDestination)
         return(
             <div>
@@ -62,13 +49,6 @@ class Sunrise extends React.Component {
                 <div id="map"></div>
                 
                 <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination}/>
-
-                
-                
-                        
-            
-                        
-                {/* <MyMapComponent isMarkerShown /> */}
             </div>
         )
     }

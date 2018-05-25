@@ -18,10 +18,11 @@ class App extends React.Component {
         longitude:'',
         sunsetTime:'',
         sunriseTime:'',
-        userDate:'',
+        userDate: '',
         month: '',
         day: '',
-        year:''
+        year:'',
+        correctSunset:''
       }
 
     this.onChange = this.onChange.bind(this);
@@ -42,22 +43,15 @@ class App extends React.Component {
       this.getAxios()
 
       let month = dateClicked.getMonth() + 1
-
       let year = dateClicked.getUTCFullYear();
-
       let day = dateClicked.getDate();
-      // console.log(day);
 
       this.setState({
         month:month,
         day:day,
         year:year,
         userDate: month + '-' + day + '-' + year
-      })
-      
-      // let dateClick = dateClicked
-      
-      // navigator.geolocation.getCurrentPosition(this.success);      
+      })   
     }
 
     getAxios(){
@@ -82,18 +76,17 @@ class App extends React.Component {
           let userDate = Date();
   
           let splitDate =  userDate.split(' ');
-          // console.log(splitDate)
           let timeOne = splitDate.splice(5,1)
-          // console.log(timeOne)
-        // console.log(typeof(timeOne))
           let newSplit2 = timeOne[0].split('-');
-          // console.log(newSplit2);
-          
           let newSplit3 = newSplit2.pop();
-          // console.log(newSplit3)
           let newSplit4 = newSplit3.split('0')[1]
-        //   console.log(newSplit4)
           let correctHour = splitSunsetTime - newSplit4  
+
+          let sunsetHour = correctHour + 12
+          console.log(sunsetHour)
+
+          let correctSunsetHour = sunsetHour + `:` + splitSunsetMinute + `:` + `00`
+          console.log(correctSunsetHour)
 
           let correctSunsetTime = correctHour + `:` + splitSunsetMinute + `PM`
 
@@ -105,9 +98,19 @@ class App extends React.Component {
 
           let correctSunriseTime = correctSunriseHour + `:` + splitSunriseMinute + `AM`
 
+          let month = this.state.date.getMonth() + 1
+          let year = this.state.date.getUTCFullYear();
+          let day = this.state.date.getDate();
+
+          console.log(month + '-' + day + '-' + year)
           this.setState({
             sunsetTime: correctSunsetTime,
-            sunriseTime: correctSunriseTime
+            sunriseTime: correctSunriseTime,
+            correctSunset: correctSunsetHour,
+            month: month,
+            day: day,
+            year: year,
+            userDate: month + '-' + day + '-' + year
           })
         })
     }
@@ -158,7 +161,7 @@ class App extends React.Component {
 
               <Link to='/Sunset'>Sunset</Link>
               <Route path='/Sunset' render={() =>
-                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime}/>
+                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime}largeSunsetTime={this.state.correctSunset}/>
               } />
             </div>
         </Router>

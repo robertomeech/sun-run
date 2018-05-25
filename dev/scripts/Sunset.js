@@ -40,22 +40,32 @@ class Sunset extends React.Component {
     }
 
     // getTimeInterval(startTime, endTime) {
-    //     let start = moment(this.state.times, "HH:mm");
-    //     let end = moment("23:30", "HH:mm");
+    //     let start = moment("20:30:00", "HH:mm:ss");
+    //     let end = moment("22:30:00", "HH:mm:ss");
     //     let minutes = end.diff(start, 'minutes');
     //     let interval = moment().hour(0).minute(minutes);
-    //     return interval.format("HH:mm");
+    //     interval.subtract(this.state.runDuration, 'minutes');
+    //     return interval.format("HH:mm:ss");
     // }
+
+    getTimeInterval(endTime) {
+        let end = moment(this.props.largeSunsetTime, "HH:mm:ss");
+        // let minutes = end.diff(start, 'minutes');
+        // let interval = moment().hour(0).minute(minutes);
+        end.subtract(this.state.runDuration, 'minutes');
+        return end.format("HH:mm:ss");
+    }
 
     
     render() {
         
         return (
             <div>
-                <RNMomentCountDown toDate={this.props.sunsetDate + this.props.sunsetTime} sourceFormatMask='MM-DD-YYYY HH:mm:ss'/>
+                {/* <RNMomentCountDown toDate={this.props.sunsetDate + this.props.largeSunsetTime} sourceFormatMask='MM-DD-YYYY HH:mm:ss' /> */}
+                {this.props.sunsetDate ? <RNMomentCountDown toDate={this.props.sunsetDate + this.props.largeSunsetTime} sourceFormatMask='MM-DD-YYYY HH:mm:ss' /> : null}
+                {/* <RNMomentCountDown toDate={'5-25-2018' + this.props.largeSunsetTime} sourceFormatMask='MM-DD-YYYY HH:mm:ss' /> */}
                 <h2>{this.state.sunsetHour}</h2>
                 <p>The Sunset will be at {this.props.sunsetTime}</p>
-                <p>User date is {this.props.sunsetDate}</p>
                 <p>Duration of Run</p>
                 <select value={this.state.runDuration} onChange={this.runDurationChange}>
                     <option value=""></option>
@@ -67,7 +77,7 @@ class Sunset extends React.Component {
                     <option value="60">60</option>
                 </select>
             <p>I want to run for {this.state.runDuration} Minutes</p>
-            {/* <p>{this.getTimeInterval()}</p> */}
+            <p>{this.getTimeInterval()}</p>
             </div>
         )
     }

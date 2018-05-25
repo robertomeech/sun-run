@@ -19,7 +19,7 @@ const MapWithADirectionsRenderer = compose(
 
             DirectionsService.route({
                 origin: new google.maps.LatLng(this.props.lat, this.props.lng),
-                destination: new google.maps.LatLng(41.8525800, -87.6514100),
+                destination: new google.maps.LatLng(this.props.lat, this.props.lng),
                 travelMode: google.maps.TravelMode.WALKING,
             }, (result, status) => {
                 if (status === google.maps.DirectionsStatus.OK) {

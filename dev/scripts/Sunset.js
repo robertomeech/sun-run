@@ -1,13 +1,21 @@
 import React from 'react';
-import Countdown from 'react-countdown-now';
+import Moment from 'react-moment';
+import RNMomentCountDown from 'react-moment-countdown';
 
 class Sunset extends React.Component {
     constructor() {
         super();
         this.state = {
-            runDuration:''
-        }
+            runDuration:'',
+            sunsetHour:'',
+            sunsetMinute:'',
+            time: new Date(),
+            currentTime: '',
+            chosenDate: '05 24 2018',
+            chosenTime: '22:00:00'
+            }
     this.runDurationChange = this.runDurationChange.bind(this)
+    this.countDownTimer = this.countDownTimer.bind(this)
     }
 
     runDurationChange(e) {
@@ -16,19 +24,25 @@ class Sunset extends React.Component {
         })
     }
 
-    leaveBy() {
-        let sunset = this.props.sunsetTime.split(':')
-    }
+    countDownTimer(e) {
+        let sunsetHour = this.props.sunsetTime.split(':')[0]
+        let sunsetMinute = this.props.sunsetTime.split(':')[1]
+        let currentTime = this.state.time.toLocaleTimeString();
+        
 
-    renderer(hours, minutes, seconds) {
-        return <span>{hours}:{minutes}:{seconds}</span>;
+        this.setState({
+            sunsetHour:sunsetHour,
+            sunsetMinute:sunsetMinute,
+            currentTime:currentTime
+        })
     }
     
-
     render() {
-
         return (
             <div>
+                <RNMomentCountDown toDate={this.state.chosenDate + this.state.chosenTime} sourceFormatMask='MM DD YYYY HH:mm:ss'/>
+
+                <h2>{this.state.sunsetHour}</h2>
                 <p>The Sunset will be at {this.props.sunsetTime}</p>
 
                 <p>Duration of Run</p>
@@ -39,7 +53,7 @@ class Sunset extends React.Component {
                     <option value="30">30</option>
                     <option value="40">40</option>
                     <option value="50">50</option>
-                    <option value="1">60</option>
+                    <option value="60">60</option>
                 </select>
             <p>I want to run for {this.state.runDuration} Minutes</p>
             </div>

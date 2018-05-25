@@ -56,6 +56,7 @@ class App extends React.Component {
           let splitSunsetMinute = sunsetTime.split(':')[1]
           let userDate = Date();
           let splitDate =  userDate.split(' ');
+          // console.log(splitDate)
           splitDate.pop();
           let newSplit = splitDate.pop();
           let newSplit2 = newSplit.split('-')
@@ -82,9 +83,9 @@ class App extends React.Component {
 
     success(position) {
       let latitude = position.coords.latitude;
-      console.log(latitude)
+      // console.log(latitude)
       let longitude = position.coords.longitude;
-      console.log(longitude)
+      // console.log(longitude)
       this.setState({
         latitude: latitude,
         longitude: longitude

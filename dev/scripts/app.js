@@ -5,6 +5,19 @@ import{BrowserRouter as Router, Route, Link, } from 'react-router-dom';
 import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js'
 import axios from 'axios';
+import firebase from 'firebase';
+
+// Initialize Firebase
+const config = {
+    apiKey: "AIzaSyCHcaafweVL2ZQVgM4zN1kFjEuIykBw7yQ",
+    authDomain: "sunrisesunset-1527022043864.firebaseapp.com",
+    databaseURL: "https://sunrisesunset-1527022043864.firebaseio.com",
+    projectId: "sunrisesunset-1527022043864",
+    storageBucket: "sunrisesunset-1527022043864.appspot.com",
+    messagingSenderId: "59111531936"
+};
+firebase.initializeApp(config);
+
 
 
 
@@ -16,13 +29,24 @@ class App extends React.Component {
         latitude:'',
         longitude:'',
         sunsetTime:'',
-        sunriseTime:''
+        sunriseTime:'',
+        loggedIn: false
+        // createEmail: '',
+        // createPassword: '',
+        // loginEmail: '',
+        // loginPassword: '',
+        // signedIn: false
       }
 
     this.onChange = this.onChange.bind(this);
     this.success = this.success.bind(this);
     this.getAxios = this.getAxios.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.logout = this.logout.bind(this);
+    // this.createUser = this.createUser.bind(this);
+    // this.signIn = this.signIn.bind(this);
+    // this.signOut = this.signOut.bind(this);
     }
 
 
@@ -38,6 +62,39 @@ class App extends React.Component {
       // navigator.geolocation.getCurrentPosition(this.success);
       
     }
+
+    handleChange(e, field) {
+        const newState = Object.assign({}, this.state);
+        newState[field] = e.target.value;
+        this.setState(newState);
+    }
+
+    // signOut(){
+    //     firebase.auth().signOut().then(function(success) {
+    //         console.log('signed out!');
+    //     }, function(error) {
+    //         console.log(error);
+    //     });
+    // }
+    
+    // createUser(e){
+    //     e.preventDefault();
+    //     const email = this.state.createEmail;
+    //     const password = this.state.createPassword;
+    //     firebase.auth().createUserWithEmailAndPassword(email, password).catch((error) => console.log(error.code, error.message));
+    // }
+
+    // signIn(e) {
+    //     e.preventDefault();
+    //     const email = this.state.loginEmail;
+    //     const password = this.state.loginPassword;
+    //     firebase.auth().signInWithEmailAndPassword(email, password)
+    //         .then((success) => {
+    //             console.log(`Logged in as ${this.state.loginEmail}`);
+    //         }), (error) => {
+    //             console.log(error)
+    //         }
+    // }
 
     getAxios(){
       axios.get('https://api.sunrise-sunset.org/json', {
@@ -105,41 +162,111 @@ class App extends React.Component {
 
     componentDidMount() {
       navigator.geolocation.getCurrentPosition(this.success);
-      // this.getAxios()
+
+      this.dbRef = firebase.database().ref('runs')
+
+      firebase.auth().onAuthStateChanged((user) => {
+          if(user != null ){
+              this.dbRef.on('value',(snapshot) => {
+                  console.log(snapshot.val())
+              });
+              this.setState({
+                  loggedIn: true
+              })
+          }
+          else{
+              console.log('user signed out');
+              this.setState({
+                  loggedIn: false
+              })
+          }
+      })
     }
-  
+    
+    loginWithGoogle(){
+        console.log('clicked button');
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        firebase.auth().signInWithPopup(provider)
+        .then((user) => {
+            console.log(user)
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+    }
+
+    logout(){
+        firebase.auth().signOut();
+        this.dbRef.off('value');
+        console.log('signed out')
+    }
+
     render() {
 
       
         
       return (
         <div>
-          {/* <button onClick={this.handleClick}>Show my location</button> */}
-
-          <div id="out">Testing</div>
-          <div></div>
-          <div></div>
-          <div>.</div>
-          <div>.</div>
-          <div>.</div>
-          <DatePicker
-            onChange={this.onChange}
-            value={this.state.date}
-          />
-        <Router>
             <div>
+                {this.state.loggedIn===false && <button onClick={this.loginWithGoogle}>Login with Google</button>}
+                {this.state.loggedIn===true ? <button onClick={this.logout}>Sign Out</button> : null}
+  
+                {this.state.loggedIn === true && <div>
+                      <div id="out">Testing</div>
+                      <div></div>
+                      <div></div>
+                      <div>.</div>
+                      <div>.</div>
+                      <div>.</div>
+                      <DatePicker
+                          onChange={this.onChange}
+                          value={this.state.date}
+                      />
+                      <Router>
+                          <div>
 
-              <Link to='/Sunrise'>Sunrise</Link>
-              <Route path='/Sunrise' render={()=> 
-                <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude}/>
-              }/>
+                              <Link to='/Sunrise'>Sunrise</Link>
+                              <Route path='/Sunrise' render={() =>
+                                  <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />
+                              } />
 
-              <Link to='/Sunset'>Sunset</Link>
-              <Route path='/Sunset' render={() =>
-                <Sunset sunsetTime={this.state.sunsetTime}/>
-              } />
+                              <Link to='/Sunset'>Sunset</Link>
+                              <Route path='/Sunset' render={() =>
+                                  <Sunset sunsetTime={this.state.sunsetTime} />
+                              } />
+                          </div>
+                      </Router>
+                  </div>}
             </div>
-        </Router>
+
+
+          {/* <div>
+              <div id="out">Testing</div>
+              <div></div>
+              <div></div>
+              <div>.</div>
+              <div>.</div>
+              <div>.</div>
+              <DatePicker
+                onChange={this.onChange}
+                value={this.state.date}
+              />
+            <Router>
+                <div>
+    
+                  <Link to='/Sunrise'>Sunrise</Link>
+                  <Route path='/Sunrise' render={()=> 
+                    <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude}/>
+                  }/>
+    
+                  <Link to='/Sunset'>Sunset</Link>
+                  <Route path='/Sunset' render={() =>
+                    <Sunset sunsetTime={this.state.sunsetTime}/>
+                  } />
+                </div>
+            </Router>
+          </div> */}
        
           
       

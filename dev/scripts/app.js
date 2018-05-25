@@ -5,8 +5,19 @@ import{BrowserRouter as Router, Route, Link, } from 'react-router-dom';
 import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js'
 import axios from 'axios';
+import firebase from 'firebase';
 import moment from 'moment'
 
+// Initialize Firebase
+const config = {
+  apiKey: "AIzaSyCHcaafweVL2ZQVgM4zN1kFjEuIykBw7yQ",
+  authDomain: "sunrisesunset-1527022043864.firebaseapp.com",
+  databaseURL: "https://sunrisesunset-1527022043864.firebaseio.com",
+  projectId: "sunrisesunset-1527022043864",
+  storageBucket: "sunrisesunset-1527022043864.appspot.com",
+  messagingSenderId: "59111531936"
+};
+firebase.initializeApp(config);
 
 
 class App extends React.Component {
@@ -18,7 +29,8 @@ class App extends React.Component {
         longitude:'',
         sunsetTime:'',
         sunriseTime:'',
-        userDate: '',
+        loggedIn: false,
+        userDate:'',
         month: '',
         day: '',
         year:'',
@@ -29,10 +41,9 @@ class App extends React.Component {
     this.success = this.success.bind(this);
     this.getAxios = this.getAxios.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.logout = this.logout.bind(this);
     }
-
-
-    // onChange = date => this.setState({ date })
 
     onChange(dateClicked) {
       
@@ -41,7 +52,6 @@ class App extends React.Component {
       })
 
       this.getAxios()
-
       let month = dateClicked.getMonth() + 1
       let year = dateClicked.getUTCFullYear();
       let day = dateClicked.getDate();
@@ -52,6 +62,12 @@ class App extends React.Component {
         year:year,
         userDate: month + '-' + day + '-' + year
       })   
+    }
+
+    handleChange(e, field) {
+      const newState = Object.assign({}, this.state);
+      newState[field] = e.target.value;
+      this.setState(newState);
     }
 
     getAxios(){
@@ -117,65 +133,94 @@ class App extends React.Component {
 
     success(position) {
       let latitude = position.coords.latitude;
-      // console.log(latitude)
       let longitude = position.coords.longitude;
-      // console.log(longitude)
       this.setState({
         latitude: latitude,
         longitude: longitude
       })
-
       this.getAxios();
     }
 
     componentDidMount() {
       navigator.geolocation.getCurrentPosition(this.success);
-      // this.getAxios()
-    }
-  
-    render() {
 
-      
-        
+      this.dbRef = firebase.database().ref('runs')
+
+      firebase.auth().onAuthStateChanged((user) => {
+          if(user != null ){
+              this.dbRef.on('value',(snapshot) => {
+                  console.log(snapshot.val())
+              });
+              this.setState({
+                  loggedIn: true
+              })
+          }
+          else{
+              console.log('user signed out');
+              this.setState({
+                  loggedIn: false
+              })
+          }
+      })
+    }
+    
+    loginWithGoogle(){
+        console.log('clicked button');
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        firebase.auth().signInWithPopup(provider)
+        .then((user) => {
+            console.log(user)
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+    }
+
+    logout(){
+        firebase.auth().signOut();
+        this.dbRef.off('value');
+        console.log('signed out')
+    }
+
+    render() {
       return (
         <div>
-          {/* <button onClick={this.handleClick}>Show my location</button> */}
-
-          <div id="out">Testing</div>
-          <div></div>
-          <div></div>
-          <div>.</div>
-          <div>.</div>
-          <div>.</div>
-          <DatePicker
-            onChange={this.onChange}
-            value={this.state.date}
-          />
-        <Router>
             <div>
+                {this.state.loggedIn===false && <button onClick={this.loginWithGoogle}>Login with Google</button>}
+                {this.state.loggedIn===true ? <button onClick={this.logout}>Sign Out</button> : null}
+  
+                {this.state.loggedIn === true && <div>
+                    <div id="out">Testing</div>
+                    <div></div>
+                    <div></div>
+                    <div>.</div>
+                    <div>.</div>
+                    <div>.</div>
+                    <DatePicker
+                      onChange={this.onChange}
+                      value={this.state.date}
+                    />
+                    <Router>
+                      <div>
 
-              <Link to='/Sunrise'>Sunrise</Link>
-              <Route path='/Sunrise' render={()=> 
-                <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude}/>
-              }/>
+                        <Link to='/Sunrise'>Sunrise</Link>
+                        <Route path='/Sunrise' render={() =>
+                            <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />
+                        } />
 
-              <Link to='/Sunset'>Sunset</Link>
-              <Route path='/Sunset' render={() =>
-                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime}largeSunsetTime={this.state.correctSunset}/>
-              } />
-            </div>
-        </Router>
-       
-          
-      
+                        <Link to='/Sunset'>Sunset</Link>
+                      <Route path='/Sunset' render={() =>
+                      <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} />
+                      } />
+                      </div>
+                    </Router>
+                </div>}
+            </div>     
         </div>
       )
     }
 }
-
-
-
-
 
 
 ReactDOM.render(<App />, document.getElementById('app'));

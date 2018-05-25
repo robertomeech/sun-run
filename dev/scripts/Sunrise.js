@@ -18,8 +18,8 @@ const MapWithADirectionsRenderer = compose(
             const DirectionsService = new google.maps.DirectionsService();
 
             DirectionsService.route({
-                origin: "HackerYou",
-                destination: "High Park",
+                origin: new google.maps.LatLng(this.props.lat, this.props.lng),
+                destination: new google.maps.LatLng(41.8525800, -87.6514100),
                 travelMode: google.maps.TravelMode.WALKING,
             }, (result, status) => {
                 if (status === google.maps.DirectionsStatus.OK) {
@@ -38,7 +38,7 @@ const MapWithADirectionsRenderer = compose(
         defaultZoom={7}
         defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
     >
-        {props.directions && <DirectionsRenderer directions={props.directions} />}
+            {props.directions && <DirectionsRenderer directions={props.directions} />}
     </GoogleMap>
 );
 
@@ -93,7 +93,8 @@ class Sunrise extends React.Component {
                 </form>
                 <div id="map"></div>
                 <button onClick={this.handleClick}>content</button>
-                <MapWithADirectionsRenderer />
+                <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} />
+
                 
                 
                         

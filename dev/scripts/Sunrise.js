@@ -26,7 +26,7 @@ const MapWithADirectionsRenderer = compose(
                     this.setState({
                         directions: result,
                     });
-                    console.log(result)
+                    // console.log(result)
                 } else {
                     console.error(`error fetching directions ${result}`);
                 }

@@ -37,7 +37,6 @@ class Sunrise extends React.Component {
         this.getLandmark()
     }
     render() {
-       
         console.log(this.state.finalDestination)
         return(
             <div>

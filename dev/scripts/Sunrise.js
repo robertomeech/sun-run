@@ -44,8 +44,8 @@ class Sunrise extends React.Component {
                     <h2 className="sunriseHeader">Sunrise</h2>
                     <p>The sunrise will be at {this.props.sunriseTime}</p>
                     <form action="#" onSubmit={this.handleSubmit}>
-                        <input type="text" name="destination" onChange={this.handleChange} value={this.state.destination}placeholder="enter a landmark?"/>
-                        <input type="submit" name="submit" />
+                        <input type="text" name="destination" onChange={this.handleChange} value={this.state.destination}placeholder="enter a landmark"/>
+                        <input type="submit" name="submit" value="search" />
                     </form>
                     <div id="map"></div>
                     <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination}/>

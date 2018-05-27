@@ -5,8 +5,11 @@ import{BrowserRouter as Router, Route, Link, } from 'react-router-dom';
 import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js'
 import axios from 'axios';
-import firebase from 'firebase';
+import firebase, {auth, provider} from 'firebase';
+
 import moment from 'moment'
+// import { FirebaseAuth } from 'react-firebaseui';
+
 
 // Initialize Firebase
 const config = {
@@ -35,7 +38,8 @@ class App extends React.Component {
         month: '',
         day: '',
         year:'',
-        correctSunset:''
+        correctSunset:'',
+        user: ''
       }
 
     this.onChange = this.onChange.bind(this);
@@ -44,6 +48,7 @@ class App extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.logout = this.logout.bind(this);
+    this.loginWithGoogle = this.loginWithGoogle.bind(this)
     }
 
     onChange(dateClicked) {
@@ -97,10 +102,10 @@ class App extends React.Component {
           let correctHour = splitSunsetTime - newSplit4  
 
           let sunsetHour = correctHour + 12
-          console.log(sunsetHour)
+        //   console.log(sunsetHour)
 
           let correctSunsetHour = sunsetHour + `:` + splitSunsetMinute + `:` + `00`
-          console.log(correctSunsetHour)
+        //   console.log(correctSunsetHour)
 
           let correctSunsetTime = correctHour + `:` + splitSunsetMinute + `PM`
 
@@ -116,7 +121,7 @@ class App extends React.Component {
           let year = this.state.date.getUTCFullYear();
           let day = this.state.date.getDate();
 
-          console.log(month + '-' + day + '-' + year)
+        //   console.log(month + '-' + day + '-' + year)
           this.setState({
             sunsetTime: correctSunsetTime,
             sunriseTime: correctSunriseTime,
@@ -139,40 +144,86 @@ class App extends React.Component {
       this.getAxios();
     }
 
+    userDataPush(user){
+        var database = firebase.database();
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('users/' + userId).set({
+                username: user.displayName,
+                email: user.email,
+                photo: user.photoURL
+
+            });
+        }
+        console.log("success")
+    }
+
     componentDidMount() {
       navigator.geolocation.getCurrentPosition(this.success);
       // need to put user info in template litereals ${ }/
-      this.dbRef = firebase.database().ref('runs')
-      console.log(this.dbRef)
+      this.dbRef = firebase.database().ref()
+      
+    //   console.log(this.dbRef)
    
-
       firebase.auth().onAuthStateChanged((user) => {
-          if(user != null ){
-              this.dbRef.on('value',(snapshot) => {
-                  // console.log(snapshot.val())
+          if (user !== null) {
+              let dbRefUser = firebase.database().ref('users/' + user.uid);
+              //Add value listener to user node in database
+              dbRefUser.on('value', (snapshot) => {
+                  if (snapshot.exists()) {
+                      let loggedInUser = snapshot.val();
+                      this.setState({
+                          loggedIn: true,
+                          user: loggedInUser,
+                      });
+                      this.dbRefUser = dbRefUser;
+                  } else { //if the user does not already exist in the database- create them
+                      console.log('new user created');
+                      const loggedInUser = {
+                          id: user.uid,
+                          name: user.displayName,
+                          photo: user.photoURL,
+                          //savedEvents
+                      }
+                      this.setState({
+                          loggedIn: true,
+                          user: loggedInUser
+                      })
+                      dbRefUser.set(loggedInUser);
+                  }
               });
+          } else { //user is logging out
+              console.log(`auth change log out`)
               this.setState({
-                  loggedIn: true
-              })
-          }
-          else{
-              console.log('user signed out');
-              this.setState({
-                  loggedIn: false
-              })
-          }
+                  loggedIn: false,
+                  user: null
+              });
+              //Remove the value event listener
+              if (this.dbRefUser) {
+                  this.dbRefUser.off();
+              }
+          }//end of else statement
       })
+    }
+    handleAuthChange(){
+
     }
     
     loginWithGoogle(){
         // console.log('clicked button');
         const provider = new firebase.auth.GoogleAuthProvider();
-
+        
         firebase.auth().signInWithPopup(provider)
         .then((user) => {
-            // console.log(user.user.email)
+            console.log(user.user)
+            console.log(user.user.uid)
+            const id = user.user.uid;
             let userEmail = user.user.email
+            this.setState({
+                uid: id
+            })
+            userDataPush(user)
             console.log(userEmail)
+            
 
         })
         .catch((error) => {
@@ -210,9 +261,9 @@ class App extends React.Component {
                     </div>
                     <Router className="section stylings">
                         <div className="transformInline">
-                            <Link className="sunriseLink" to='/Sunrise'> <img src="../../images/sunrise.svg" alt=""/> Sunrise</Link>
+                            <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
                             <p className="or">or</p>
-                            <Link className="sunsetLink" to='/Sunset'> <img src="../../images/sunset.svg" alt=""/> Sunset</Link>
+                            <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
                             <Route path='/Sunrise' render={() =>
                             <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
                             <div className="testingbackground">

@@ -194,7 +194,7 @@ class App extends React.Component {
                 <h1>Sun Run</h1>
                 {this.state.loggedIn === false && 
                     <div>
-                        <p>Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can make it to a chosen destination to watch the sunrise. Choose a date to get started!</p>
+                        <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can make it to a chosen destination to watch the sunrise. Choose a date to get started!</p>
                         <button className="signInOutButton signInButton"onClick={this.loginWithGoogle}>Login with Google</button>
                     </div>
                 }

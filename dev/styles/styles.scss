@@ -29,6 +29,10 @@ p {
   @include fontSize(16);
   text-align:center;
 }
+.introP{
+    margin:100px auto;
+    width:700px;
+}
 
 @function makelongshadow($pink) {
   $val: 0px 0px $orange;
@@ -116,6 +120,7 @@ h1 {
   width:200px;
   margin:0 auto;
   z-index:10;
+  position:relative;
   
 }
 
@@ -128,6 +133,7 @@ h1 {
   border-radius:45px;
   transition:all 3s ease-in-out;
   z-index:100;
+  
   img{
       height:40px;
   }
@@ -172,6 +178,7 @@ h1 {
   background: linear-gradient(to bottom right, $orange, $pink);
   margin-bottom: 20px;
   border-radius:10px;
+  position:relative;
   // border: 1px solid white;
   button {
     margin-top: 20px;
@@ -227,6 +234,7 @@ select {
   background: linear-gradient(to top right, $orange, $yellow, $beige);
   border-radius:10px;
   margin-bottom: 50px;
+  position:relative;
   & .sunriseHeader {
     font-family: $pacifico;
     margin-top: 20px;

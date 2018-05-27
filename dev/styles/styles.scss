@@ -159,6 +159,7 @@ h1 {
   
   img{
     height:40px;
+    fill:white;
   }
   &:hover{
     background: linear-gradient(to top right, $beige, $yellow);
@@ -178,7 +179,7 @@ h1 {
   margin-top: 10px;
   img{
       height:40px;
-      color:white;
+      fill:white;
   }
   &:hover{
     background:linear-gradient(to bottom right, $pink, $orange);

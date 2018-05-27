@@ -145,6 +145,15 @@ class App extends React.Component {
       navigator.geolocation.getCurrentPosition(this.success);
 
       this.dbRef = firebase.database().ref('runs')
+      console.log(this.dbRef)
+    //   const userTable = firebase.database().ref(`users/${user.additionalUserInfo.profile.email}`)
+    //   console.log(user.additionalUserInfo.profile.email)
+    //   const newUser = {
+    //       `${user.additionalUserInfo.profile.email}`
+    //   }
+    //   userTable.push({
+          
+    //   })
 
       firebase.auth().onAuthStateChanged((user) => {
           if(user != null ){

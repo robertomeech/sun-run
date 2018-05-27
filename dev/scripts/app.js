@@ -190,11 +190,12 @@ class App extends React.Component {
       return (
         <div>
             <div className="wrapper">
+                <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
                 {this.state.loggedIn===true ? <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
                 <h1>Sun Run</h1>
                 {this.state.loggedIn === false && 
                     <div>
-                        <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can make it to a chosen destination to watch the sunrise. Choose a date to get started!</p>
+                        <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can select a chosen destination to watch the beautiful sunrise. Choose a date to get started!</p>
                         <button className="signInOutButton signInButton"onClick={this.loginWithGoogle}>Login with Google</button>
                     </div>
                 }
@@ -210,7 +211,7 @@ class App extends React.Component {
                     <Router className="section stylings">
                         <div className="transformInline">
                             <Link className="sunriseLink" to='/Sunrise'> <img src="../../images/sunrise.svg" alt=""/> Sunrise</Link>
-                            <p>or</p>
+                            <p className="or">or</p>
                             <Link className="sunsetLink" to='/Sunset'> <img src="../../images/sunset.svg" alt=""/> Sunset</Link>
                             <Route path='/Sunrise' render={() =>
                             <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />

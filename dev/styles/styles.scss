@@ -4,9 +4,9 @@
 // global styles
 
 body {
-  font-family: $body;
-  // background: $pink;
-  color: white;
+font-family: $body;
+// background: $pink;
+color: white;
 //   background: linear-gradient(to left, $orange, $yellow, $beige);
 background:skyblue;
   background-repeat: none;
@@ -31,7 +31,12 @@ p {
 }
 .introP{
     margin:100px auto;
-    width:700px;
+    width:60%;
+    padding-top: 100px;
+    @media(max-width: 790px) {
+      width: 70%;
+      padding-top: 0;
+    }
 }
 
 @function makelongshadow($pink) {
@@ -48,7 +53,7 @@ h1 {
   line-height: 1;
   margin-bottom: 50px;
   font-family: $pacifico;
-  z-index:-100;
+  z-index:10;
 }
 
 // reusable classes
@@ -59,10 +64,22 @@ h1 {
   margin-top: 20px;
 }
 
+.clouds {
+  fill: white;
+  position: absolute;
+  top: 50px;
+  right: -200px;
+  height: 600px;
+  z-index: -1;
+  @media(max-width: 790px) {
+    display: none;
+  }
+}
+
 .signInOutButton {
 //   border: 1px solid white;
-    border:none;
-    border-radius:10px;
+  border:none;
+  border-radius:10px;
   background: transparent;
   text-transform: uppercase;
   color: white;
@@ -73,6 +90,9 @@ h1 {
   margin-bottom: 20px;
   float: right;
   @include fontSize(16);
+  &:hover {
+    background: linear-gradient(to right, rgba(241,231,103,1) 0%, rgb(255, 109, 0)100%);
+  }
 }
 .signInButton{
     float:none;
@@ -111,6 +131,7 @@ h1 {
 .sunsetLink, .sunriseLink {
   border: 1px solid white;
   text-decoration: none;
+  z-index: 20;
   padding: 5px 20px;
   @include fontSize(16);
   color: white;
@@ -119,7 +140,6 @@ h1 {
   transition: all 0.3s ease-in-out;
   width:200px;
   margin:0 auto;
-  z-index:10;
   position:relative;
   
 }
@@ -131,16 +151,21 @@ h1 {
   flex-flow:column nowrap;
   border:none;
   border-radius:45px;
-  transition:all 3s ease-in-out;
-  z-index:100;
+  transition: all .15s ease-in-out;
+  z-index:20;
+  box-shadow: (0,0,0,0.5);
+  margin-bottom: 10px;
   
   img{
-      height:40px;
+    height:40px;
   }
   &:hover{
-      background: linear-gradient(to top right, $beige, $yellow);
+    background: linear-gradient(to top right, $beige, $yellow);
+    box-shadow: -10px 10px 3.5px 1px rgba(0,0,0,0.67);
+    transform: scale(1.05);
   }
 }
+
 
 .sunsetLink {
   background: linear-gradient(to bottom right, $orange, $pink);
@@ -148,12 +173,16 @@ h1 {
   flex-flow:column nowrap;
   border:none;
   border-radius:45px;
+  transition: all 0.15s ease-in-out;
+  margin-top: 10px;
   img{
       height:40px;
       color:white;
   }
   &:hover{
-      background:linear-gradient(to bottom right, $pink, $orange)
+    background:linear-gradient(to bottom right, $pink, $orange);
+    box-shadow: -10px 10px 3.5px 1px rgba(0,0,0,0.67);
+    transform: scale(1.05);
   }
 }
 .saveLink {
@@ -172,6 +201,9 @@ h1 {
   margin-top: 50px;
   @include fontSize(90);
 //   text-shadow: makelongshadow($pink); 
+  @media(max-width: 350px) {
+    @include fontSize (80);
+  }
 }
 
 .sunsetSection {
@@ -179,6 +211,7 @@ h1 {
   margin-bottom: 20px;
   border-radius:10px;
   position:relative;
+  
   // border: 1px solid white;
   button {
     margin-top: 20px;
@@ -208,8 +241,8 @@ select {
     letter-spacing: 2px;
     border-bottom: 1px solid white;
     background: $yellow;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    // -webkit-appearance: none;
+    // -moz-appearance: none;
     background: url('../../images/down-arrow.png') no-repeat;
     background-size: 7%;
     background-position-x: 95%;
@@ -240,6 +273,9 @@ select {
     margin-top: 20px;
     @include fontSize(90);
     // text-shadow: makelongshadow($yellow); 
+    @media(max-width: 350px) {
+      @include fontSize (80);
+    }
   }
 
   input {
@@ -253,7 +289,13 @@ select {
     background:black;
     color: white;
     padding: 5px 10px;
+    width: 300px;
+    text-transform: uppercase;
     @include fontSize(14);
+    @media(max-width: 350px) {
+      width: 200px;
+      text-align: center;
+    }
   }
 
   input[type=submit] {
@@ -300,6 +342,7 @@ select {
   display: inline-flex;
   position: relative;
   font-family: 'Montserrat', sans-serif;
+  z-index: 30;
   @include fontSize(16);
   color: black;
 }

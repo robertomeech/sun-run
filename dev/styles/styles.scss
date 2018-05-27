@@ -34,8 +34,9 @@ p {
     width:60%;
     padding-top: 100px;
     @media(max-width: 790px) {
-      width: 70%;
+      width: 80%;
       padding-top: 0;
+      margin: 50px auto;
     }
 }
 

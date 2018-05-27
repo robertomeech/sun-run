@@ -141,15 +141,10 @@ class App extends React.Component {
 
     componentDidMount() {
       navigator.geolocation.getCurrentPosition(this.success);
-<<<<<<< HEAD
-
-      this.dbRef = firebase.database().ref('user/runs')
-=======
       // need to put user info in template litereals ${ }/
       this.dbRef = firebase.database().ref('runs')
       console.log(this.dbRef)
    
->>>>>>> 29c4709b63e4143ca0a6f8b91e1b841e65d27330
 
       firebase.auth().onAuthStateChanged((user) => {
           if(user != null ){

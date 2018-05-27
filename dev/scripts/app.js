@@ -31,6 +31,7 @@ class App extends React.Component {
         sunriseTime:'',
         loggedIn: false,
         userDate:'',
+
         month: '',
         day: '',
         year:'',
@@ -82,11 +83,8 @@ class App extends React.Component {
           // correcting the sunrise/sunset times so that they are no longer in UTC
 
           let sunsetTime = res.data.results.sunset
-          // console.log(sunsetTime)
           let splitSunsetTime = sunsetTime.split(':')[0]
-          // console.log(splitSunsetTime)
           let splitSunsetMinute = sunsetTime.split(':')[1]
-          // console.log(splitSunsetMinute);
           
           // isolating user date
           let userDate = Date();
@@ -143,13 +141,20 @@ class App extends React.Component {
 
     componentDidMount() {
       navigator.geolocation.getCurrentPosition(this.success);
+<<<<<<< HEAD
 
       this.dbRef = firebase.database().ref('user/runs')
+=======
+      // need to put user info in template litereals ${ }/
+      this.dbRef = firebase.database().ref('runs')
+      console.log(this.dbRef)
+   
+>>>>>>> 29c4709b63e4143ca0a6f8b91e1b841e65d27330
 
       firebase.auth().onAuthStateChanged((user) => {
           if(user != null ){
               this.dbRef.on('value',(snapshot) => {
-                  console.log(snapshot.val())
+                  // console.log(snapshot.val())
               });
               this.setState({
                   loggedIn: true
@@ -165,55 +170,61 @@ class App extends React.Component {
     }
     
     loginWithGoogle(){
-        console.log('clicked button');
+        // console.log('clicked button');
         const provider = new firebase.auth.GoogleAuthProvider();
 
         firebase.auth().signInWithPopup(provider)
         .then((user) => {
-            console.log(user)
+            // console.log(user.user.email)
+            let userEmail = user.user.email
+            console.log(userEmail)
+
         })
         .catch((error) => {
-            console.log(error)
+            // console.log(error)
         });
     }
 
     logout(){
         firebase.auth().signOut();
         this.dbRef.off('value');
-        console.log('signed out')
+        // console.log('signed out')
     }
 
     render() {
       return (
         <div>
-            <div>
-                {this.state.loggedIn===false && <button onClick={this.loginWithGoogle}>Login with Google</button>}
-                {this.state.loggedIn===true ? <button onClick={this.logout}>Sign Out</button> : null}
-  
+            <div className="wrapper">
+                {this.state.loggedIn===true ? <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
+                <h1>Sun Run</h1>
+                {this.state.loggedIn === false && 
+                    <div>
+                        <p>Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can make it to a chosen destination to watch the sunrise. Choose a date to get started!</p>
+                        <button className="signInOutButton signInButton"onClick={this.loginWithGoogle}>Login with Google</button>
+                    </div>
+                }
+
                 {this.state.loggedIn === true && <div>
-                    <div id="out">Testing</div>
-                    <div></div>
-                    <div></div>
-                    <div>.</div>
-                    <div>.</div>
-                    <div>.</div>
-                    <DatePicker
-                      onChange={this.onChange}
-                      value={this.state.date}
-                    />
-                    <Router>
-                      <div>
-
-                        <Link to='/Sunrise'>Sunrise</Link>
-                        <Route path='/Sunrise' render={() =>
-                            <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />
-                        } />
-
-                        <Link to='/Sunset'>Sunset</Link>
-                      <Route path='/Sunset' render={() =>
-                      <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} />
-                      } />
-                      </div>
+                    <div className="datePicker">
+                        <h2>Run Date</h2>
+                        <DatePicker
+                        onChange={this.onChange}
+                        value={this.state.date}
+                        />
+                    </div>
+                    <Router className="section stylings">
+                        <div className="transformInline">
+                            <Link className="sunriseLink" to='/Sunrise'> <img src="../../images/sunrise.svg" alt=""/> Sunrise</Link>
+                            <p>or</p>
+                            <Link className="sunsetLink" to='/Sunset'> <img src="../../images/sunset.svg" alt=""/> Sunset</Link>
+                            <Route path='/Sunrise' render={() =>
+                            <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
+                            <div className="testingbackground">
+                                <Route path='/Sunset' render={() =>
+                                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} />
+                                } />
+                            </div>
+                        </div>
                     </Router>
                 </div>}
             </div>     

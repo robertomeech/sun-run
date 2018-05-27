@@ -49,7 +49,7 @@ class Sunrise extends React.Component {
                     </form>
                     <div id="map"></div>
                     <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination}/>
-                    <button className="sunriseLink">Save Run</button>
+                    <button className="saveLink">Save Run</button>
                 </div>
             </div>
         )

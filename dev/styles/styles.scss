@@ -7,7 +7,8 @@ body {
   font-family: $body;
   // background: $pink;
   color: white;
-  background: linear-gradient(to left, $orange, $yellow, $beige);
+//   background: linear-gradient(to left, $orange, $yellow, $beige);
+background:skyblue;
   background-repeat: none;
 }
 
@@ -26,11 +27,12 @@ h2 {
 p {
   line-height: 1.5;
   @include fontSize(16);
+  text-align:center;
 }
 
 @function makelongshadow($pink) {
   $val: 0px 0px $orange;
-  @for $i from 1 through 600 {
+  @for $i from 1 through 700 {
     $val: #{$val}, -#{$i}px #{$i}px #{$pink};
   }
   @return $val;
@@ -42,6 +44,7 @@ h1 {
   line-height: 1;
   margin-bottom: 50px;
   font-family: $pacifico;
+  z-index:-100;
 }
 
 // reusable classes
@@ -53,17 +56,25 @@ h1 {
 }
 
 .signInOutButton {
-  border: 1px solid white;
+//   border: 1px solid white;
+    border:none;
+    border-radius:10px;
   background: transparent;
   text-transform: uppercase;
   color: white;
   letter-spacing: 1px;
-  padding: 5px 20px;
+  padding: 10px 25px;
   background: linear-gradient(to right, $yellow, $orange);
   background: $yellow;
   margin-bottom: 20px;
   float: right;
   @include fontSize(16);
+}
+.signInButton{
+    float:none;
+    position:relative;
+    left:50%;
+    transform:translateX(-50%);
 }
 
 .transformInline > * {
@@ -83,39 +94,68 @@ h1 {
   margin: 0 auto;
   text-align: center;
   margin-bottom: 20px;
+//   background:black;
   h2 {
     margin-bottom: 10px;
     margin-top: 50px;
   }
 }
 
+
 // link styles
 
 .sunsetLink, .sunriseLink {
   border: 1px solid white;
   text-decoration: none;
-  padding: 5px 30px;
+  padding: 5px 20px;
   @include fontSize(16);
   color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: all ease 0.3s;
-  &:hover {
-    background: $pink;
-  }
-  &:active {
-    border: 1px solid $pink;
-  }
+  transition: all 0.3s ease-in-out;
+  width:200px;
+  margin:0 auto;
+  z-index:10;
+  
 }
 
 .sunriseLink {
-  margin-right: 10px;
   background: linear-gradient(to top right, $yellow, $beige);
+  color:black;
+  display:flex;
+  flex-flow:column nowrap;
+  border:none;
+  border-radius:45px;
+  transition:all 3s ease-in-out;
+  z-index:100;
+  img{
+      height:40px;
+  }
+  &:hover{
+      background: linear-gradient(to top right, $beige, $yellow);
+  }
 }
 
 .sunsetLink {
-  margin-left: 10px;
-  background: linear-gradient(to bottom right, $orange, $pink)
+  background: linear-gradient(to bottom right, $orange, $pink);
+  display:flex;
+  flex-flow:column nowrap;
+  border:none;
+  border-radius:45px;
+  img{
+      height:40px;
+      color:white;
+  }
+  &:hover{
+      background:linear-gradient(to bottom right, $pink, $orange)
+  }
+}
+.saveLink {
+    background:$orange;
+    border:none;
+    border-radius:20px;
+    padding:15px 30px;
+    color:white;
 }
 
 // sunset styles
@@ -125,12 +165,13 @@ h1 {
   font-family: $pacifico;
   margin-top: 50px;
   @include fontSize(90);
-  text-shadow: makelongshadow($pink); 
+//   text-shadow: makelongshadow($pink); 
 }
 
 .sunsetSection {
   background: linear-gradient(to bottom right, $orange, $pink);
   margin-bottom: 20px;
+  border-radius:10px;
   // border: 1px solid white;
   button {
     margin-top: 20px;
@@ -156,9 +197,9 @@ h1 {
 select {
     text-align: center;
     height: 30px ;
-    width: 100px;
+    width: 50px;
     letter-spacing: 2px;
-    border: 1px solid white;
+    border-bottom: 1px solid white;
     background: $yellow;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -176,7 +217,7 @@ select {
         border-radius: 0;
         background: $pink;
         color: white;
-        
+        margin:0 auto;        
     }  
 }
 
@@ -184,12 +225,13 @@ select {
 
 .sunriseSection {
   background: linear-gradient(to top right, $orange, $yellow, $beige);
+  border-radius:10px;
   margin-bottom: 50px;
   & .sunriseHeader {
     font-family: $pacifico;
-    margin-top: 50px;
+    margin-top: 20px;
     @include fontSize(90);
-    text-shadow: makelongshadow($yellow); 
+    // text-shadow: makelongshadow($yellow); 
   }
 
   input {
@@ -199,7 +241,8 @@ select {
   }
 
   input[type=text] {
-    background: orange;
+    // background: orange;
+    background:black;
     color: white;
     padding: 5px 10px;
     @include fontSize(14);
@@ -250,7 +293,7 @@ select {
   position: relative;
   font-family: 'Montserrat', sans-serif;
   @include fontSize(16);
-  color: white;
+  color: black;
 }
 .react-date-picker,
 .react-date-picker *,
@@ -266,7 +309,7 @@ select {
 }
 .react-date-picker__button {
   display: flex;
-  border: thin solid white;
+  border: thin solid black;
 }
 .react-date-picker__button__input {
   min-width: calc(4px + (4px * 3) +  4.32em  +  0.434em);
@@ -274,8 +317,8 @@ select {
   display: flex;
   padding: 0 2px;
   align-items: baseline;
-  background: $yellow;
-  color: white;
+  background: $beige;
+  color: black;
   padding: 10px 20px;
 }
 .react-date-picker__button__input__divider {
@@ -289,7 +332,7 @@ select {
   border: 0;
   background: none;
   -moz-appearance: textfield;
-  color: white;
+  color: black;
 }
 .react-date-picker__button__input__input::-webkit-outer-spin-button,
 .react-date-picker__button__input__input::-webkit-inner-spin-button {
@@ -308,7 +351,7 @@ select {
   border: 0;
   // background: transparent;
   padding: 4px 6px;
-  background: $yellow;
+  background: $beige;
 }
 .react-date-picker__button__icon:enabled {
   cursor: pointer;
@@ -342,18 +385,18 @@ select {
 }
 
 .react-calendar__tile.react-calendar__month-view__days__day {
-  border: 1px solid white;
-  color: white;
-  background: $yellow;
+  border: 1px solid black;
+  color: black;
+  background: $beige;
   position: relative;
   right: 80px;
   // background: white;
 }
 
 .react-calendar__month-view__weekdays__weekday, .react-calendar__navigation__label {
-  background: $yellow;
-  border: 1px solid white;
-  color: white;
+  background: $beige;
+  border: 1px solid black;
+  color: black;
   position: relative;
   right: 80px;
 }
@@ -365,10 +408,10 @@ select {
   position: relative;
   right: 80px;
   background: $yellow;
-  border: 1px solid white;
+  border: 1px solid black;
 
 }
 
 .react-calendar__navigation__arrow {
-  color: white;
+  color: black;
 }

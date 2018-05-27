@@ -71,7 +71,7 @@ class Sunset extends React.Component {
                     <h4>
                         {this.props.sunsetDate ? <RNMomentCountDown className="countdown" toDate={this.props.sunsetDate + this.props.largeSunsetTime} sourceFormatMask='MM-DD-YYYY HH:mm:ss' /> : null}
                     </h4>
-                    <button className="sunsetLink">Save Run</button>
+                    <button className="saveLink">Save Run</button>
                 </div>
             
             </div>

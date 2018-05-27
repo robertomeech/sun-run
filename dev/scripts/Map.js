@@ -3,7 +3,8 @@ import React from 'react';
 import axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
 import { compose, withProps, lifecycle, withState} from 'recompose';
-
+let duration = '';
+let distance = '';
 const MapWithADirectionsRenderer = compose(
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
@@ -33,7 +34,13 @@ const MapWithADirectionsRenderer = compose(
                     }
                 });
             }
-            
+            // console.log(nextProps.directions.routes[0].legs[0].distance.text)
+            // console.log(nextProps.directions.routes[0].legs[0].duration.text)
+            distance = nextProps.directions.routes[0].legs[0].distance.text
+            console.log(distance)
+            duration = nextProps.directions.routes[0].legs[0].duration.text
+            console.log(duration)
+            // put time wizardry here
         },
         componentDidMount() {
             // console.log(this)
@@ -53,8 +60,12 @@ const MapWithADirectionsRenderer = compose(
         }
     })
 )(props => {
+<<<<<<< HEAD
     console.log(props)
     
+=======
+    // console.log(props.directions.request)
+>>>>>>> 7dea9ac1621ff9b4a2e13f9dd41b00eeabab0139
     // const one = (props.directions.routes[0])
     // const two = (one.legs[0])
     // const three = (two.duration.text)
@@ -62,12 +73,17 @@ const MapWithADirectionsRenderer = compose(
     // console.log(props.directions.routes[0].legs[0].duration.text)
     return(
         
-        <GoogleMap
-            defaultZoom={7}
-            defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
-        >
-            {props.directions && <DirectionsRenderer directions={props.directions} />}
-        </GoogleMap>
+        <div>
+            <GoogleMap
+                defaultZoom={7}
+                defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
+            >
+                {props.directions && <DirectionsRenderer directions={props.directions} />}
+            </GoogleMap>
+            <div>
+                <p className="testing">{duration}{distance}</p>
+            </div>
+        </div>
     )
 }
     

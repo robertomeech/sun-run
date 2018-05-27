@@ -1,8 +1,256 @@
+@import 'setup';
+@import 'utils';
+
+// global styles
+
+body {
+  font-family: $body;
+  // background: $pink;
+  color: white;
+  background: linear-gradient(to left, $orange, $yellow, $beige);
+  background-repeat: none;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  // text-transform: uppercase;
+  @include fontSize(20);
+  letter-spacing: 1px;
+  // border-bottom: 1px solid 
+}
+
+p {
+  line-height: 1.5;
+  @include fontSize(16);
+}
+
+@function makelongshadow($pink) {
+  $val: 0px 0px $orange;
+  @for $i from 1 through 600 {
+    $val: #{$val}, -#{$i}px #{$i}px #{$pink};
+  }
+  @return $val;
+}
+
+h1 {
+  @include fontSize(150);
+  text-shadow: makelongshadow($orange); 
+  line-height: 1;
+  margin-bottom: 50px;
+  font-family: $pacifico;
+}
+
+// reusable classes
+
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.signInOutButton {
+  border: 1px solid white;
+  background: transparent;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 1px;
+  padding: 5px 20px;
+  background: linear-gradient(to right, $yellow, $orange);
+  background: $yellow;
+  margin-bottom: 20px;
+  float: right;
+  @include fontSize(16);
+}
+
+.transformInline > * {
+  display: inline;
+}
+
+.transformInline {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+
+// date picker styles
+
+.datePicker {
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 20px;
+  h2 {
+    margin-bottom: 10px;
+    margin-top: 50px;
+  }
+}
+
+// link styles
+
+.sunsetLink, .sunriseLink {
+  border: 1px solid white;
+  text-decoration: none;
+  padding: 5px 30px;
+  @include fontSize(16);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all ease 0.3s;
+  &:hover {
+    background: $pink;
+  }
+  &:active {
+    border: 1px solid $pink;
+  }
+}
+
+.sunriseLink {
+  margin-right: 10px;
+  background: linear-gradient(to top right, $yellow, $beige);
+}
+
+.sunsetLink {
+  margin-left: 10px;
+  background: linear-gradient(to bottom right, $orange, $pink)
+}
+
+// sunset styles
+
+
+.sunsetHeader {
+  font-family: $pacifico;
+  margin-top: 50px;
+  @include fontSize(90);
+  text-shadow: makelongshadow($pink); 
+}
+
+.sunsetSection {
+  background: linear-gradient(to bottom right, $orange, $pink);
+  margin-bottom: 20px;
+  // border: 1px solid white;
+  button {
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+  h2 {
+    margin-bottom: 20px;
+    // text-transform: uppercase;
+    margin-top: 20px;
+  }
+  h3 {
+    @include fontSize(18)
+  }
+  h4 {
+    @include fontSize(30);
+    margin-top: 20px;
+  }
+  &.countdown {
+    color: $pink;
+  }
+}
+
+select {
+    text-align: center;
+    height: 30px ;
+    width: 100px;
+    letter-spacing: 2px;
+    border: 1px solid white;
+    background: $yellow;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('../../images/down-arrow.png') no-repeat;
+    background-size: 7%;
+    background-position-x: 95%;
+    background-position-y: 50%;
+    border-radius: 0; 
+    @include fontSize(16);
+    color: white;
+    margin-right: 5px;
+    margin-left: 5px;
+    option {
+        margin: 20px;
+        border-radius: 0;
+        background: $pink;
+        color: white;
+        
+    }  
+}
+
+// sunrise section styling
+
+.sunriseSection {
+  background: linear-gradient(to top right, $orange, $yellow, $beige);
+  margin-bottom: 50px;
+  & .sunriseHeader {
+    font-family: $pacifico;
+    margin-top: 50px;
+    @include fontSize(90);
+    text-shadow: makelongshadow($yellow); 
+  }
+
+  input {
+    border: 1px solid white;
+    margin-bottom: 20px;
+
+  }
+
+  input[type=text] {
+    background: orange;
+    color: white;
+    padding: 5px 10px;
+    @include fontSize(14);
+  }
+
+  input[type=submit] {
+    background: $orange;
+    color: white;
+    @include fontSize(14);
+    text-transform: uppercase;
+    padding: 5px 10px;
+    &:hover {
+      background: $yellow;
+      transform: all ease 0.3s;
+    }
+
+  }
+
+  button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // date picker styling 
 
 .react-date-picker {
   display: inline-flex;
   position: relative;
+  font-family: 'Montserrat', sans-serif;
+  @include fontSize(16);
+  color: white;
 }
 .react-date-picker,
 .react-date-picker *,
@@ -13,12 +261,12 @@
   box-sizing: border-box;
 }
 .react-date-picker--disabled {
-  background-color: #f0f0f0;
+  // background-color: #f0f0f0;
   color: #6d6d6d;
 }
 .react-date-picker__button {
   display: flex;
-  border: thin solid gray;
+  border: thin solid white;
 }
 .react-date-picker__button__input {
   min-width: calc(4px + (4px * 3) +  4.32em  +  0.434em);
@@ -26,6 +274,9 @@
   display: flex;
   padding: 0 2px;
   align-items: baseline;
+  background: $yellow;
+  color: white;
+  padding: 10px 20px;
 }
 .react-date-picker__button__input__divider {
   padding: 1px 0;
@@ -38,6 +289,7 @@
   border: 0;
   background: none;
   -moz-appearance: textfield;
+  color: white;
 }
 .react-date-picker__button__input__input::-webkit-outer-spin-button,
 .react-date-picker__button__input__input::-webkit-inner-spin-button {
@@ -54,15 +306,16 @@
 }
 .react-date-picker__button__icon {
   border: 0;
-  background: transparent;
+  // background: transparent;
   padding: 4px 6px;
+  background: $yellow;
 }
 .react-date-picker__button__icon:enabled {
   cursor: pointer;
 }
 .react-date-picker__button__icon:enabled:hover svg g,
 .react-date-picker__button__icon:enabled:focus svg g {
-  stroke: #0078d7;
+  stroke: $pink;
 }
 .react-date-picker__button__icon:disabled svg g {
   stroke: #6d6d6d;
@@ -86,4 +339,36 @@
 }
 .react-date-picker__calendar .react-calendar {
   border-width: thin;
+}
+
+.react-calendar__tile.react-calendar__month-view__days__day {
+  border: 1px solid white;
+  color: white;
+  background: $yellow;
+  position: relative;
+  right: 80px;
+  // background: white;
+}
+
+.react-calendar__month-view__weekdays__weekday, .react-calendar__navigation__label {
+  background: $yellow;
+  border: 1px solid white;
+  color: white;
+  position: relative;
+  right: 80px;
+}
+
+.react-calendar__navigation__prev-button, 
+.react-calendar__navigation__next-button,
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  position: relative;
+  right: 80px;
+  background: $yellow;
+  border: 1px solid white;
+
+}
+
+.react-calendar__navigation__arrow {
+  color: white;
 }

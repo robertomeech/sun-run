@@ -243,8 +243,8 @@ select {
     letter-spacing: 2px;
     border-bottom: 1px solid white;
     background: $yellow;
-    // -webkit-appearance: none;
-    // -moz-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     background: url('../../images/down-arrow.png') no-repeat;
     background-size: 7%;
     background-position-x: 95%;

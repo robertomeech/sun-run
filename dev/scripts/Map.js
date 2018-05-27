@@ -54,6 +54,7 @@ const MapWithADirectionsRenderer = compose(
     })
 )(props => {
     console.log(props)
+    
     // const one = (props.directions.routes[0])
     // const two = (one.legs[0])
     // const three = (two.duration.text)

@@ -16,11 +16,13 @@ class SavedRuns extends React.Component {
         super();
         this.state = {
             // userId: this.props.userId
-            savedRuns: []
+            savedRuns: [],
+            userImage:''
             // userId: ''
             // userId: this.props.user.id
         }
         this.getDataFromFirebase = this.getDataFromFirebase.bind(this);
+        this.removeFirebaseItem = this.removeFirebaseItem.bind(this)
     }
 
     getDataFromFirebase(){
@@ -37,7 +39,8 @@ class SavedRuns extends React.Component {
             }
 
             this.setState({
-                savedRuns: savedRun
+                savedRuns: savedRun,
+                userImage: this.props.userImage
             })
         });
         // this.setState({
@@ -46,9 +49,22 @@ class SavedRuns extends React.Component {
         // })
     }
 
+    removeFirebaseItem(keyToRemove){
+        // firebase.database().ref('users/' + this.props.userId + '/userRuns/'.key).remove()
+        console.log('clicked')
+        console.log(keyToRemove)
+
+
+        // const dbRef = firebase.database().ref('users/' + this.props.userId + '/userRuns');
+        
+        firebase.database().ref('users/' + this.props.userId + `/userRuns/${keyToRemove}`).remove()
+            
+        
+    }
     componentDidMount(){
         this.getDataFromFirebase()
     }
+
 
     
     render(){
@@ -56,7 +72,10 @@ class SavedRuns extends React.Component {
             <div className='savedRunsContainer'>
                 {this.state.savedRuns.map((run) => {
                     return(
-                    <div className='savedRun'>
+                    <div className='savedRun' key={run.key}>
+                        <button onClick={() => this.removeFirebaseItem(run.key)}>
+                            <img src="../../images/x.svg" className='x' alt=""/>
+                        </button>
                         <h3>Date: {run.run.date}</h3>
                         <h3>Time to leave: {run.run.leaveTime}</h3>
                         <h3>Run Duration: {run.run.runTime}</h3>

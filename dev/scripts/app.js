@@ -4,10 +4,9 @@ import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import{BrowserRouter as Router, Route, Link, } from 'react-router-dom';
 import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js';
-import SavedRuns from './SavedRuns.js';
 import axios from 'axios';
 import firebase, {auth, provider} from 'firebase';
-
+import SavedRuns from './SavedRuns.js'
 import moment from 'moment'
 // import { FirebaseAuth } from 'react-firebaseui';
 
@@ -278,7 +277,7 @@ class App extends React.Component {
                             <div className="transformInline">
                                 <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
                                 <Route path='/SavedRuns' render={() => 
-                                <SavedRuns user={this.state.user} />} />
+                                <SavedRuns userId={this.state.user.id} />} />
 
 
                                 <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
@@ -290,10 +289,11 @@ class App extends React.Component {
                                 <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
 
                                 <div className="testingbackground">
-                                    <Route path='/Sunset' render={() =>
-                                    <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
+                                <Route path='/Sunset' render={() =>
+                                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
                                     }/>
                                 </div>
+
                             </div>
                         </Router>
                     </div>}

@@ -3,6 +3,8 @@ import Moment from 'react-moment';
 import RNMomentCountDown from 'react-moment-countdown';
 import moment from 'moment';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
+import { BrowserRouter as Router, Route, Link, } from 'react-router-dom';
+import SavedRuns from './SavedRuns'
 
 class Sunset extends React.Component {
     constructor() {
@@ -70,7 +72,14 @@ class Sunset extends React.Component {
                     </h4>
                     <button className="saveLink" onClick={() => {this.props.runDataPush(this.runData())}}>Save Run</button>
                 </div>
-            
+                <Router>
+                    <div>
+                    <Link className='userImage' to='/SavedRuns'>
+                        <img className='userIMG' src={this.state.userImage} alt="user image" />
+                    </Link>
+                    <Route path='/SavedRuns'/>
+                    </div>
+                </Router>
             </div>
         )
     }

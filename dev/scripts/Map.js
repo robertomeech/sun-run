@@ -1,10 +1,11 @@
 import React from 'react';
-
+// import Sunrise from './Sunrise.js';f
 import axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
 import { compose, withProps, lifecycle, withState } from 'recompose';
 
 const MapWithADirectionsRenderer = compose(
+
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
         loadingElement: <div style={{ height: `100%` }} />,
@@ -62,11 +63,10 @@ const MapWithADirectionsRenderer = compose(
                 defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
             >
                 {props.directions && <DirectionsRenderer directions={props.directions} />}
-            </GoogleMap>
+            </GoogleMap>           
         </div>
     )
 }
-
 );
 
 export default MapWithADirectionsRenderer;

@@ -15,24 +15,35 @@ class SavedRuns extends React.Component {
     constructor(){
         super();
         this.state = {
-            user:{},
-            userID: ''
-            // userID: this.props.user.ID
+            // userId: this.props.userId
+            savedRuns: []
+            // userId: ''
+            // userId: this.props.user.id
         }
         this.getDataFromFirebase = this.getDataFromFirebase.bind(this);
     }
 
     getDataFromFirebase(){
-        // const dbRef = firebase.database().ref(users.userID)
-        // console.log(this.props.user)
-        this.setState({
-            user:this.props.user,
-            userID:this.props.userID
-        })
-        console.log(this.state.user)
-        
+        const dbRef = firebase.database().ref('users/' + this.props.userId + '/userRuns/');
+        dbRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            console.log(data)
 
+            const savedRun = [];
 
+            for (let run in data) {
+                data[run].key = run
+                savedRun.push(data[run])
+            }
+
+            this.setState({
+                savedRuns: savedRun
+            })
+        });
+        // this.setState({
+        //     user:this.props.user,
+        //     userID:this.props.userID
+        // })
     }
 
     componentDidMount(){
@@ -42,7 +53,9 @@ class SavedRuns extends React.Component {
     
     render(){
         return(
-            <div><h1>HELLO WORLD</h1></div>
+            <div>
+                <h1>Hello World</h1>
+            </div>
         )
     }
 

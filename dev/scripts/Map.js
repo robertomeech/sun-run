@@ -1,8 +1,9 @@
 import React from 'react';
-// import Sunrise from './Sunrise.js';f
 import axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
 import { compose, withProps, lifecycle, withState } from 'recompose';
+import moment from 'moment';
+
 
 const MapWithADirectionsRenderer = compose(
 
@@ -31,6 +32,11 @@ const MapWithADirectionsRenderer = compose(
                         console.error(`error fetching directions`, result);
                     }
                 });
+                // console.log(props.directions && props.directions.routes[0].legs[0].duration.text)
+                // let durationOne = props.directions && props.directions.routes[0].legs[0].duration.text
+                // let durationTwo = durationOne.split(" mins")
+                // let durationThree = durationTwo[0]
+                // console.log(durationThree)
             }
             // put time wizardry here
         },
@@ -52,12 +58,47 @@ const MapWithADirectionsRenderer = compose(
     })
 )(props => {
     console.log(props)
+    // console.log(props.sunriseTime)
+    // let time = props.sunriseTime.split('AM')
+    // console.log(time)
+    // let time2 = time[0]
+    // console.log(time2)
+    // getTimeInterval() {
+    //     let end = moment(time2, "HH:mm:ss");
+    //     end.subtract(this.state.runDuration, 'minutes');
+    //     return end.format("H:mm")
+    // }
+    // console.log(props.directions && props.directions.routes[0].legs[0].duration.text)
+    // let durationOne = props.directions && props.directions.routes[0].legs[0].duration.text
+    // let durationTwo = durationOne.split(" mins")
+    // let durationThree = durationTwo[0]
+    // console.log(durationThree)
+    let durationOne
+    let durationTwo
+    let durationThree
+
+    if(props.directions !== null){
+    console.log(props.directions && props.directions.routes[0].legs[0].duration.text)
+     durationOne = props.directions && props.directions.routes[0].legs[0].duration.text
+     durationTwo = durationOne.split(" mins")
+        console.log(durationTwo)
+     durationThree = durationTwo[0]
+    console.log(durationThree)
+    }
+
+    
+
+
     return (
 
-        <div className="destinationDetails">
-                <h3>{props.sunriseTime}</h3>
-                <h3>{props.directions && props.directions.routes[0].legs[0].distance.text}</h3>
-                <h3>{props.directions && props.directions.routes[0].legs[0].duration.text}</h3>
+        <div>
+            {props.sunriseTime}
+            {props.directions && props.directions.routes[0].legs[0].distance.text}
+            {props.directions && props.directions.routes[0].legs[0].duration.text}
+            {props.getTimeInterval(props.sunriseTime, durationThree)}
+
+
+
             <GoogleMap
                 defaultZoom={7}
                 defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}

@@ -4,24 +4,24 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsR
 import{compose, withProps, lifecycle} from 'recompose';
 import MapWithADirectionsRenderer from './Map.js';
 import moment from 'moment';
-// import Map from './Map.js'
 
 class Sunrise extends React.Component {
 
     constructor(){
         super();
-        this.handleClick = this.handleClick.bind(this)
         this.state={
             destination: "",
             finalDestination: "Toronto"
-            // sunrise: this.props.sunriseTime
         }
+        // final destination initializes the map with a destination of Toronto
+        // this will only change once the user enters a destination
+        this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        // this.sunriseTimeTest = this.sunriseTimeTest.bind(this)
     }
        
     handleChange(e){
+        // ?????? okay
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -33,14 +33,15 @@ class Sunrise extends React.Component {
             finalDestination: destClone
         })
     }
-
-    // getTimeInterval() {
-    //     let end = moment(this.props.sunriseTime, "HH:mm:ss");
-    //     end.subtract(50, 'minutes');
-    //     return end.format("H:mm")
-    // }
+    getTimeInterval(sunriseTime, runDuration) {
+        let end = moment(sunriseTime, "HH:mm");
+        end.subtract(runDuration, 'minutes');
+        return end.format("H:mm")
+    }
 
     handleClick(){
+        // this is a function of the google-maps-react npm module
+        // takes user input and puts it into the function
         this.getLandmark()
     }
     render() {
@@ -55,9 +56,8 @@ class Sunrise extends React.Component {
                         <input type="submit" name="submit" value="search" />
                     </form>
                     <div id="map"></div>
-                    <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} sunriseTime={this.props.sunriseTime}/>
+                    <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} getTimeInterval={this.getTimeInterval}sunriseTime={this.props.sunriseTime} />
                     <button className="saveLink" >Save Run</button>
-                    {/* <p>{this.getTimeInterval()}</p> */}
 
                 
 

@@ -334,6 +334,22 @@ select {
     background:$orange;
     .savedRun{
         background:$pink;
+        position:relative;
+        padding:15px;
+        width:300px;
+        margin:15px auto;
+        border-radius:10px;
+        .x{
+            height:20px;
+            position:absolute;
+            top:10px;
+            right:10px;
+            transition:all 0.3s ease-in-out;
+            &:hover{
+                transform:rotate(180deg);
+                
+            }
+        }
         h3{
             font-size:20px;
         }

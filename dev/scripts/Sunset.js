@@ -26,22 +26,19 @@ class Sunset extends React.Component {
         })
     }
 
-    // countDownTimer(e) {
-    //     let sunsetHour = this.props.sunsetTime.split(':')[0]
-    //     let sunsetMinute = this.props.sunsetTime.split(':')[1]
-    //     let currentTime = this.state.time.toLocaleTimeString();
-
-    //     this.setState({
-    //         sunsetHour:sunsetHour,
-    //         sunsetMinute:sunsetMinute,
-    //         currentTime:currentTime
-    //     })
-    // }
-
-    getTimeInterval(endTime) {
+    getTimeInterval() {
         let end = moment(this.props.sunsetTime, "HH:mm:ss");
         end.subtract(this.state.runDuration, 'minutes');
         return end.format("H:mm")
+    }
+
+    runData() {
+        let runData = {
+            leaveTime: this.getTimeInterval(),
+            runTime: this.state.runDuration,
+            date: this.props.sunsetDate
+        }
+        return runData;
     }
 
     
@@ -71,7 +68,7 @@ class Sunset extends React.Component {
                     <h4>
                         {this.props.sunsetDate ? <RNMomentCountDown className="countdown" toDate={this.props.sunsetDate + this.props.largeSunsetTime} sourceFormatMask='MM-DD-YYYY HH:mm:ss' /> : null}
                     </h4>
-                    <button className="saveLink">Save Run</button>
+                    <button className="saveLink" onClick={() => {this.props.runDataPush(this.runData())}}>Save Run</button>
                 </div>
             
             </div>

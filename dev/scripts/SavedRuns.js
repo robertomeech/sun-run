@@ -21,6 +21,7 @@ class SavedRuns extends React.Component {
             // userId: this.props.user.id
         }
         this.getDataFromFirebase = this.getDataFromFirebase.bind(this);
+        // this.removeRun = this.removeRun.bind(this)
     }
 
     getDataFromFirebase(){
@@ -50,23 +51,12 @@ class SavedRuns extends React.Component {
         this.getDataFromFirebase()
     }
 
+    removeRun(firebaseKey) {
+        firebase.database().ref(`run/${firebaseKey}`).remove();
+    }
     
     render(){
         return(
-<<<<<<< HEAD
-            <div>
-                <h1>Hello World</h1>
-
-                <div>
-                    {this.state.savedRuns.map((run)=>{
-                        return(
-                            <div>
-                                
-                            </div>
-                        )
-                    })}
-                </div>
-=======
             <div className='savedRunsContainer'>
                 {this.state.savedRuns.map((run) => {
                     return(
@@ -74,11 +64,13 @@ class SavedRuns extends React.Component {
                         <h3>Date: {run.run.date}</h3>
                         <h3>Time to leave: {run.run.leaveTime}</h3>
                         <h3>Run Duration: {run.run.runTime}</h3>
+                        <button onClick={() => {
+                            console.log('clicked the button')
+                        }}>Remove run</button>
                     </div>
 
                     )
                 })}
->>>>>>> 2dceacda5929c6024b1f05fbb0cc155dc5031425
             </div>
         )
     }

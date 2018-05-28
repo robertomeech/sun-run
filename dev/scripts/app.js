@@ -254,6 +254,7 @@ class App extends React.Component {
         return (
             <div>
                 <div className="wrapper">
+                
                     <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
                     {this.state.loggedIn===true ? 
                         <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
@@ -264,7 +265,6 @@ class App extends React.Component {
                             <button className="signInOutButton signInButton"onClick={this.loginWithGoogle}>Login with Google</button>
                         </div>
                     }
-
                     {this.state.loggedIn === true && <div>
                         <div className="datePicker">
                             <h2>Run Date</h2>
@@ -277,9 +277,8 @@ class App extends React.Component {
                             <div className="transformInline">
                                 <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
                                 <Route path='/SavedRuns' render={() => 
-                                <SavedRuns userId={this.state.user.id} />} />
-
-
+                                <SavedRuns userId={this.state.user.id}/>} 
+                                />
                                 <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
                                 <p className="or">or</p>
                                 <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>

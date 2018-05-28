@@ -92,7 +92,7 @@ const MapWithADirectionsRenderer = compose(
 
     return (
 
-        <div>
+        <div className='whatever'>
             {props.directions && props.directions.routes[0].legs[0].distance.text}
             {props.directions && props.directions.routes[0].legs[0].duration.text}
             {props.getTimeInterval(props.sunriseTime, durationThree)}

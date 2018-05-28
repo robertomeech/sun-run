@@ -252,6 +252,7 @@ class App extends React.Component {
                     {this.state.loggedIn===true ? 
                         <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
                     <h1>Sun Run</h1>
+                    <img src="../../images/sun.svg" className="sunImage" alt=""/>
                     {this.state.loggedIn === false && 
                         <div>
                             <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can select a chosen destination to watch the beautiful sunrise. Choose a date to get started!</p>

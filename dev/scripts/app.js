@@ -34,7 +34,6 @@ class App extends React.Component {
         sunriseTime:'',
         loggedIn: false,
         userDate:'',
-
         month: '',
         day: '',
         year:'',
@@ -49,6 +48,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.logout = this.logout.bind(this);
     this.loginWithGoogle = this.loginWithGoogle.bind(this)
+    this.runDataPush = this.runDataPush.bind(this)
     }
 
     onChange(dateClicked) {
@@ -157,7 +157,19 @@ class App extends React.Component {
         console.log("success")
     }
 
+    runDataPush(runs) {
+      let userId = this.state.user.id
+      console.log(userId)
+      console.log(runs)
+      firebase.database().ref('users/' + userId + '/userRuns/').push({
+        run: runs,
+        user: userId
+      })      
+    }
+
     componentDidMount() {
+      console.log(this.state.user.id)
+
       navigator.geolocation.getCurrentPosition(this.success);
       // need to put user info in template litereals ${ }/
       this.dbRef = firebase.database().ref()
@@ -268,8 +280,8 @@ class App extends React.Component {
                             <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
                             <div className="testingbackground">
                                 <Route path='/Sunset' render={() =>
-                                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} />
-                                } />
+                                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
+                                }/>
                             </div>
                         </div>
                     </Router>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import{BrowserRouter as Router, Route, Link, } from 'react-router-dom';
 import Sunrise from './Sunrise.js';
-import Sunset from './Sunset.js'
+import Sunset from './Sunset.js';
 import axios from 'axios';
 import firebase, {auth, provider} from 'firebase';
 import SavedRuns from './SavedRuns.js'
@@ -39,7 +39,7 @@ class App extends React.Component {
         year:'',
         correctSunset:'',
         user: '',
-        userImage: ''
+        userImage: '',
       }
 
     this.onChange = this.onChange.bind(this);
@@ -256,15 +256,7 @@ class App extends React.Component {
                 <div className="wrapper">
                     <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
                     {this.state.loggedIn===true ? 
-                    <div>
-                        <button className="signInOutButton"onClick={this.logout}>Sign Out</button>
-                        {/* <Router>
-                            <div>
-                                
-                            </div>
-                        </Router> */}
-                    </div>
-                    : null}
+                        <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
                     <h1>Sun Run</h1>
                     {this.state.loggedIn === false && 
                         <div>
@@ -283,11 +275,19 @@ class App extends React.Component {
                         </div>
                         <Router className="section stylings">
                             <div className="transformInline">
+                                <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
+                                <Route path='/SavedRuns' render={() => 
+                                <SavedRuns userId={this.state.user.id} />} />
+
+
                                 <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
                                 <p className="or">or</p>
                                 <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
+
+
                                 <Route path='/Sunrise' render={() =>
                                 <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
+
                                 <div className="testingbackground">
                                 <Route path='/Sunset' render={() =>
                                 <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>

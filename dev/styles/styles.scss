@@ -83,7 +83,7 @@ h1 {
     width:40px;
     border-radius:50%;
     float:right;
-    margin-right:25px;
+    margin-right: 80%;
 }
 
 .signInOutButton {
@@ -198,6 +198,7 @@ h1 {
 }
 .saveLink {
     background:$orange;
+    margin-top: 5%;
     border:none;
     border-radius:20px;
     padding:15px 30px;
@@ -256,8 +257,9 @@ select {
     -moz-appearance: none;
     background: url('../../images/down-arrow.png') no-repeat;
     background-size: 25%;
-    background-position-x: 50%;
+    background-position-x: 90%;
     background-position-y: 50%;
+    padding-left: 7.5px;
     border-radius: 0; 
     @include fontSize(16);
     color: white;

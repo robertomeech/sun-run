@@ -23,7 +23,7 @@ class SavedRuns extends React.Component {
 
             const savedRun = [];
 
-            for (let run in data) {
+            for(let run in data) {
                 data[run].key = run
                 savedRun.push(data[run])
             }
@@ -43,7 +43,6 @@ class SavedRuns extends React.Component {
     componentDidMount(){ 
         this.getDataFromFirebase()
     }
-
 
     
     render(){

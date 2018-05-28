@@ -27,7 +27,6 @@ class Sunrise extends React.Component {
     }
        
     handleChange(e){
-        // ?????? okay
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -56,11 +55,16 @@ class Sunrise extends React.Component {
         return end.format("H:mm")
     }
 
+    getTimeInterval(sunriseTime, runDuration) {
+        let end = moment(sunriseTime, "HH:mm");
+        end.subtract(runDuration, 'minutes');
+        return end.format("H:mm")
+    }
+
     handleClick(){
-        // this is a function of the google-maps-react npm module
-        // takes user input and puts it into the function
         this.getLandmark()
     }
+
     render() {
         console.log(this.state.finalDestination)
         return(
@@ -74,11 +78,6 @@ class Sunrise extends React.Component {
                     </form>
                     <div id="map"></div>
                     <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} getTimeInterval={this.getTimeInterval} date={this.state.date} sunriseTime={this.props.sunriseTime} runDataPush={this.props.runDataPush} runData={this.runData}/>
-                    {/* <button className="saveLink" >Save Run</button> */}
-
-                
-
-
                 </div>
             </div>
         )

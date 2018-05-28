@@ -2,7 +2,7 @@ import React from 'react';
 
 import axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
-import { compose, withProps, lifecycle, withState} from 'recompose';
+import { compose, withProps, lifecycle, withState } from 'recompose';
 
 const MapWithADirectionsRenderer = compose(
     withProps({
@@ -13,11 +13,11 @@ const MapWithADirectionsRenderer = compose(
     }),
     withScriptjs,
     withGoogleMap,
-    withState('directions', 'setDirections', null ),
+    withState('directions', 'setDirections', null),
     lifecycle({
-        
-        componentWillReceiveProps(nextProps){
-            if(this.props.destination !== nextProps.destination){
+
+        componentWillReceiveProps(nextProps) {
+            if (this.props.destination !== nextProps.destination) {
                 const DirectionsService = new google.maps.DirectionsService();
                 DirectionsService.route({
                     origin: new google.maps.LatLng(this.props.lat, this.props.lng),
@@ -51,12 +51,13 @@ const MapWithADirectionsRenderer = compose(
     })
 )(props => {
     console.log(props)
-    return(
-        
+    return (
+
         <div>
             {props.sunriseTime}
             {props.directions && props.directions.routes[0].legs[0].distance.text}
             {props.directions && props.directions.routes[0].legs[0].duration.text}
+
             <GoogleMap
                 defaultZoom={7}
                 defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
@@ -66,7 +67,7 @@ const MapWithADirectionsRenderer = compose(
         </div>
     )
 }
-    
+
 );
 
 export default MapWithADirectionsRenderer;

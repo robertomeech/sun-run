@@ -1,31 +1,21 @@
 import React from 'react';
 import firebase, { auth, provider } from 'firebase';
 
-// const config = {
-//     apiKey: "AIzaSyCHcaafweVL2ZQVgM4zN1kFjEuIykBw7yQ",
-//     authDomain: "sunrisesunset-1527022043864.firebaseapp.com",
-//     databaseURL: "https://sunrisesunset-1527022043864.firebaseio.com",
-//     projectId: "sunrisesunset-1527022043864",
-//     storageBucket: "sunrisesunset-1527022043864.appspot.com",
-//     messagingSenderId: "59111531936"
-// };
-// firebase.initializeApp(config);
+
 
 class SavedRuns extends React.Component {
     constructor(){
         super();
         this.state = {
-            // userId: this.props.userId
             savedRuns: [],
             userImage:''
-            // userId: ''
-            // userId: this.props.user.id
         }
         this.getDataFromFirebase = this.getDataFromFirebase.bind(this);
         this.removeFirebaseItem = this.removeFirebaseItem.bind(this)
     }
 
     getDataFromFirebase(){
+        //gets all run data from firebase and displays it on the page
         const dbRef = firebase.database().ref('users/' + this.props.userId + '/userRuns/');
         dbRef.on('value', (snapshot) => {
             const data = snapshot.val();
@@ -43,25 +33,14 @@ class SavedRuns extends React.Component {
                 userImage: this.props.userImage
             })
         });
-        // this.setState({
-        //     user:this.props.user,
-        //     userID:this.props.userID
-        // })
+        
     }
 
     removeFirebaseItem(keyToRemove){
-        // firebase.database().ref('users/' + this.props.userId + '/userRuns/'.key).remove()
-        console.log('clicked')
-        console.log(keyToRemove)
-
-
-        // const dbRef = firebase.database().ref('users/' + this.props.userId + '/userRuns');
-        
+        //takes the key from the mapped item clicked and removes the firebase item corresponding to the key.
         firebase.database().ref('users/' + this.props.userId + `/userRuns/${keyToRemove}`).remove()
-            
-        
     }
-    componentDidMount(){
+    componentDidMount(){ 
         this.getDataFromFirebase()
     }
 

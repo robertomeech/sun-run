@@ -250,13 +250,13 @@ select {
     height: 30px ;
     width: 50px;
     letter-spacing: 2px;
-    border-bottom: 1px solid white;
+    border: 1px solid white;
     background: $yellow;
     -webkit-appearance: none;
     -moz-appearance: none;
     background: url('../../images/down-arrow.png') no-repeat;
-    background-size: 7%;
-    background-position-x: 95%;
+    background-size: 25%;
+    background-position-x: 50%;
     background-position-y: 50%;
     border-radius: 0; 
     @include fontSize(16);

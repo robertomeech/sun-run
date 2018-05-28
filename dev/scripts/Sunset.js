@@ -11,15 +11,11 @@ class Sunset extends React.Component {
         super();
         this.state = {
             runDuration:'',
-            // sunsetHour:'',
-            // sunsetMinute:'',
+
             time: new Date(),
-            // currentTime: '',
-            // chosenDate: '05-27-2018',
-            // chosenTime: '22:00:00',
+
             }
     this.runDurationChange = this.runDurationChange.bind(this)
-    // this.countDownTimer = this.countDownTimer.bind(this)
     }
 
     runDurationChange(e) {

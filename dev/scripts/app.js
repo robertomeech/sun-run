@@ -8,7 +8,6 @@ import axios from 'axios';
 import firebase, {auth, provider} from 'firebase';
 import SavedRuns from './SavedRuns.js'
 import moment from 'moment'
-// import { FirebaseAuth } from 'react-firebaseui';
 
 
 // Initialize Firebase
@@ -152,7 +151,6 @@ class App extends React.Component {
             firebase.database().ref('users/' + userId).set({
                 username: user.displayName,
                 email: user.email,
-                // photo: user.photoURL
 
             });
         }
@@ -175,7 +173,6 @@ class App extends React.Component {
         // need to put user info in template litereals ${ }/
         this.dbRef = firebase.database().ref()
         
-        //   console.log(this.dbRef)
         
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
@@ -183,7 +180,6 @@ class App extends React.Component {
                 //Add value listener to user node in database
                 dbRefUser.on('value', (snapshot) => {
                     if (snapshot.exists()) {
-                        // console.log(this.state.user.id)
                       let loggedInUser = snapshot.val();
                       this.setState({
                           loggedIn: true,
@@ -197,7 +193,6 @@ class App extends React.Component {
                           id: user.uid,
                           name: user.displayName,
                           photo: user.photoURL,
-                          //savedEvents
                       }
                       this.setState({
                           loggedIn: true,
@@ -221,7 +216,6 @@ class App extends React.Component {
     }
     
     loginWithGoogle(){
-        // console.log('clicked button');
         const provider = new firebase.auth.GoogleAuthProvider();
         
         firebase.auth().signInWithPopup(provider)
@@ -240,14 +234,14 @@ class App extends React.Component {
 
         })
         .catch((error) => {
-            // console.log(error)
+            console.log(error)
         });
     }
 
     logout(){
         firebase.auth().signOut();
         this.dbRef.off('value');
-        // console.log('signed out')
+        console.log('signed out')
     }
 
     render() {

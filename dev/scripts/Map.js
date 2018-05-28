@@ -56,6 +56,7 @@ const MapWithADirectionsRenderer = compose(
         <div>
             {props.directions && props.directions.routes[0].legs[0].distance.text}
             {props.directions && props.directions.routes[0].legs[0].duration.text}
+            {props.sunriseTime}
             <GoogleMap
                 defaultZoom={7}
                 defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}

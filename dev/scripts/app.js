@@ -38,7 +38,8 @@ class App extends React.Component {
         day: '',
         year:'',
         correctSunset:'',
-        user: ''
+        user: '',
+        userImage: ''
       }
 
     this.onChange = this.onChange.bind(this);
@@ -130,6 +131,7 @@ class App extends React.Component {
             day: day,
             year: year,
             userDate: month + '-' + day + '-' + year
+            
           })
         })
     }
@@ -168,24 +170,25 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-      console.log(this.state.user.id)
-
-      navigator.geolocation.getCurrentPosition(this.success);
-      // need to put user info in template litereals ${ }/
-      this.dbRef = firebase.database().ref()
-      
-    //   console.log(this.dbRef)
-   
-      firebase.auth().onAuthStateChanged((user) => {
-          if (user !== null) {
-              let dbRefUser = firebase.database().ref('users/' + user.uid);
-              //Add value listener to user node in database
-              dbRefUser.on('value', (snapshot) => {
-                  if (snapshot.exists()) {
+        
+        navigator.geolocation.getCurrentPosition(this.success);
+        // need to put user info in template litereals ${ }/
+        this.dbRef = firebase.database().ref()
+        
+        //   console.log(this.dbRef)
+        
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user !== null) {
+                let dbRefUser = firebase.database().ref('users/' + user.uid);
+                //Add value listener to user node in database
+                dbRefUser.on('value', (snapshot) => {
+                    if (snapshot.exists()) {
+                        // console.log(this.state.user.id)
                       let loggedInUser = snapshot.val();
                       this.setState({
                           loggedIn: true,
                           user: loggedInUser,
+                          userImage: user.photoURL
                       });
                       this.dbRefUser = dbRefUser;
                   } else { //if the user does not already exist in the database- create them
@@ -231,7 +234,8 @@ class App extends React.Component {
             const id = user.user.uid;
             let userEmail = user.user.email
             this.setState({
-                uid: id
+                uid: id,
+                userImage: user.photoURL
             })
             userDataPush(user)
             console.log(userEmail)
@@ -250,46 +254,57 @@ class App extends React.Component {
     }
 
     render() {
-      return (
-        <div>
-            <div className="wrapper">
-                <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
-                {this.state.loggedIn===true ? <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
-                <h1>Sun Run</h1>
-                {this.state.loggedIn === false && 
+        return (
+            <div>
+                <div className="wrapper">
+                    <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
+                    {this.state.loggedIn===true ? 
                     <div>
-                        <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can select a chosen destination to watch the beautiful sunrise. Choose a date to get started!</p>
-                        <button className="signInOutButton signInButton"onClick={this.loginWithGoogle}>Login with Google</button>
-                    </div>
-                }
-
-                {this.state.loggedIn === true && <div>
-                    <div className="datePicker">
-                        <h2>Run Date</h2>
-                        <DatePicker
-                        onChange={this.onChange}
-                        value={this.state.date}
-                        />
-                    </div>
-                    <Router className="section stylings">
-                        <div className="transformInline">
-                            <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
-                            <p className="or">or</p>
-                            <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
-                            <Route path='/Sunrise' render={() =>
-                            <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
-                            <div className="testingbackground">
-                                <Route path='/Sunset' render={() =>
-                                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
-                                }/>
+                        <button className="signInOutButton"onClick={this.logout}>Sign Out</button>
+                        <Router>
+                            <div>
+                                <Link className='userImage' to='/savedRuns'> <img className='userIMG'src={this.state.userImage} alt=""/></Link>
+                                <Route path='/savedRuns' />
                             </div>
+                        </Router>
+                    </div>
+                    : null}
+                    <h1>Sun Run</h1>
+                    {this.state.loggedIn === false && 
+                        <div>
+                            <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can select a chosen destination to watch the beautiful sunrise. Choose a date to get started!</p>
+                            <button className="signInOutButton signInButton"onClick={this.loginWithGoogle}>Login with Google</button>
                         </div>
-                    </Router>
-                </div>}
-            </div>     
-        </div>
-      )
+                    }
+
+                    {this.state.loggedIn === true && <div>
+                        <div className="datePicker">
+                            <h2>Run Date</h2>
+                            <DatePicker
+                            onChange={this.onChange}
+                            value={this.state.date}
+                            />
+                        </div>
+                        <Router className="section stylings">
+                            <div className="transformInline">
+                                <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
+                                <p className="or">or</p>
+                                <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
+                                <Route path='/Sunrise' render={() =>
+                                <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
+                                <div className="testingbackground">
+                                    <Route path='/Sunset' render={() =>
+                                    <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
+                                    }/>
+                                </div>
+                            </div>
+                        </Router>
+                    </div>}
+                </div>     
+            </div>
+        )
     }
+
 }
 
 

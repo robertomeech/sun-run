@@ -281,7 +281,7 @@ class App extends React.Component {
 
 
                                 <Route path='/Sunrise' render={() =>
-                                <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
+                                <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} date={this.state.userDate}runDataPush={this.runDataPush} />} />
 
                                 <div className="testingbackground">
                                 <Route path='/Sunset' render={() =>

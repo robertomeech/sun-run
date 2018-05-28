@@ -190,6 +190,8 @@ h1 {
 .sunsetLink {
   background: linear-gradient(to bottom right, $orange, $pink);
   border:none;
+  display:flex;
+  flex-flow:column nowrap;
   border-radius:45px;
   transition: all 0.15s ease-in-out;
   margin-top: 10px;

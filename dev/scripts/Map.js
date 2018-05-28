@@ -66,15 +66,6 @@ const MapWithADirectionsRenderer = compose(
 
     return (
 
-<<<<<<< HEAD
-        <div className='whatever'>
-            {props.directions && props.directions.routes[0].legs[0].distance.text}
-            {props.directions && props.directions.routes[0].legs[0].duration.text}
-            {props.getTimeInterval(props.sunriseTime, durationThree)}
-
-
-
-=======
         <div className="mapBottom">
             <ul>
                 <li>Run Distance: {props.directions && props.directions.routes[0].legs[0].distance.text}</li>
@@ -82,7 +73,6 @@ const MapWithADirectionsRenderer = compose(
                 <li>Leave By: {props.getTimeInterval(props.sunriseTime, durationThree)}</li>
             </ul>
             
->>>>>>> c414551cbbbee17f037d8ebd1c0bd542dca5fffe
             <GoogleMap
                 defaultZoom={7}
                 defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}

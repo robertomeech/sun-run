@@ -4,9 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsR
 import{compose, withProps, lifecycle} from 'recompose';
 import MapWithADirectionsRenderer from './Map.js';
 import moment from 'moment';
-
-
-
+// import Map from './Map.js'
 
 class Sunrise extends React.Component {
 
@@ -22,10 +20,6 @@ class Sunrise extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         // this.sunriseTimeTest = this.sunriseTimeTest.bind(this)
     }
-
-    getDuration(){
-
-    }
        
     handleChange(e){
         this.setState({
@@ -39,10 +33,12 @@ class Sunrise extends React.Component {
             finalDestination: destClone
         })
     }
-    // sunriseTimeTest(){
-    //     console.log(this.state.sunrise)
-    // }
 
+    // getTimeInterval() {
+    //     let end = moment(this.props.sunriseTime, "HH:mm:ss");
+    //     end.subtract(50, 'minutes');
+    //     return end.format("H:mm")
+    // }
 
     handleClick(){
         this.getLandmark()
@@ -61,6 +57,7 @@ class Sunrise extends React.Component {
                     <div id="map"></div>
                     <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} sunriseTime={this.props.sunriseTime}/>
                     <button className="saveLink" >Save Run</button>
+                    {/* <p>{this.getTimeInterval()}</p> */}
                 </div>
             </div>
         )

@@ -4,13 +4,14 @@
 // global styles
 
 body {
-font-family: $body;
+    font-family: $body;
 // background: $pink;
-color: white;
+    color: white;
 //   background: linear-gradient(to left, $orange, $yellow, $beige);
-background:skyblue;
-  background-repeat: none;
-  overflow-x:hidden;
+    background:skyblue;
+    background-repeat: none;
+    overflow-x:hidden;
+    width:100%;
 }
 
 h1, h2, h3, h4 {
@@ -56,6 +57,16 @@ h1 {
   margin-bottom: 50px;
   font-family: $pacifico;
   z-index:10;
+}
+
+.sunImage{
+    position:absolute;
+    left:100px;
+    top:-100px;
+    height:400px;
+    fill:white;
+    z-index:-100;
+
 }
 
 // reusable classes
@@ -178,9 +189,9 @@ h1 {
 
 .sunsetLink {
   background: linear-gradient(to bottom right, $orange, $pink);
+  border:none;
   display:flex;
   flex-flow:column nowrap;
-  border:none;
   border-radius:45px;
   transition: all 0.15s ease-in-out;
   margin-top: 10px;
@@ -226,6 +237,8 @@ h1 {
   margin-bottom: 20px;
   border-radius:10px;
   position:relative;
+  width:90%;
+  margin:0 auto;
   
   // border: 1px solid white;
   button {
@@ -285,6 +298,8 @@ select {
   border-radius:10px;
   margin-bottom: 50px;
   position:relative;
+  width:90%;
+  margin:0 auto;
   & .sunriseHeader {
     font-family: $pacifico;
     margin-top: 20px;
@@ -335,6 +350,10 @@ select {
   button {
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+  .whatever{
+      background:black;
+      margin-bottom:40px;
   }
 
   

@@ -219,9 +219,6 @@ class App extends React.Component {
           }//end of else statement
       })
     }
-    handleAuthChange(){
-
-    }
     
     loginWithGoogle(){
         // console.log('clicked button');

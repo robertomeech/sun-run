@@ -259,13 +259,14 @@ select {
     background-size: 25%;
     background-position-x: 90%;
     background-position-y: 50%;
-    padding-left: 7.5px;
+    padding-right: 10px;
     border-radius: 0; 
     @include fontSize(16);
     color: white;
     margin-right: 5px;
     margin-left: 5px;
     option {
+        text-align: center;
         margin: 20px;
         border-radius: 0;
         background: $pink;

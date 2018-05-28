@@ -47,6 +47,16 @@ class Sunrise extends React.Component {
     handleClick(){
         this.getLandmark()
     }
+
+    // runData() {
+    //     let runData = {
+    //         leaveTime: this.getTimeInterval(),
+    //         // runTime: this.state.runDuration,
+    //         date: this.props.sunriseDate
+    //     }
+    //     return runData;
+    // }
+
     render() {
         console.log(this.state.finalDestination)
         return(
@@ -60,7 +70,6 @@ class Sunrise extends React.Component {
                     </form>
                     <div id="map"></div>
                     <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} getTimeInterval={this.getTimeInterval}sunriseTime={this.props.sunriseTime} />
-                    <button className="saveLink" >Save Run</button>
                 </div>
             </div>
         )

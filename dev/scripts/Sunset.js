@@ -72,14 +72,6 @@ class Sunset extends React.Component {
                     </h4>
                     <button className="saveLink" onClick={() => {this.props.runDataPush(this.runData())}}>Save Run</button>
                 </div>
-                <Router>
-                    <div>
-                    <Link className='userImage' to='/SavedRuns'>
-                        <img className='userIMG' src={this.state.userImage} alt="user image" />
-                    </Link>
-                    <Route path='/SavedRuns'/>
-                    </div>
-                </Router>
             </div>
         )
     }

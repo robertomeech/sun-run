@@ -29,6 +29,7 @@ const MapWithADirectionsRenderer = compose(
                 }, (result, status) => {
                     if (status === google.maps.DirectionsStatus.OK) {
                         this.props.setDirections(result)
+                        console.log(result.routes[0].legs[0].distance.text)
                     } else {
                         console.error(`error fetching directions`, result);
                     }
@@ -60,6 +61,7 @@ const MapWithADirectionsRenderer = compose(
         }
     })
 )(props => {
+    
     // console.log(props.directions.request)
     // const one = (props.directions.routes[0])
     // const two = (one.legs[0])

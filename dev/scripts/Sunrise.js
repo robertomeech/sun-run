@@ -40,6 +40,12 @@ class Sunrise extends React.Component {
     //     return end.format("H:mm")
     // }
 
+    getTimeInterval(sunriseTime, runDuration) {
+        let end = moment(sunriseTime, "HH:mm");
+        end.subtract(runDuration, 'minutes');
+        return end.format("H:mm")
+    }
+
     handleClick(){
         this.getLandmark()
     }
@@ -55,7 +61,7 @@ class Sunrise extends React.Component {
                         <input type="submit" name="submit" value="search" />
                     </form>
                     <div id="map"></div>
-                    <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} sunriseTime={this.props.sunriseTime}/>
+                    <MapWithADirectionsRenderer getTimeInterval={this.getTimeInterval} lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} sunriseTime={this.props.sunriseTime}/>
                     <button className="saveLink" >Save Run</button>
                     {/* <p>{this.getTimeInterval()}</p> */}
 

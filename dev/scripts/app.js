@@ -152,7 +152,7 @@ class App extends React.Component {
             firebase.database().ref('users/' + userId).set({
                 username: user.displayName,
                 email: user.email,
-                photo: user.photoURL
+                // photo: user.photoURL
 
             });
         }
@@ -266,31 +266,32 @@ class App extends React.Component {
                         </div>
                     }
                     {this.state.loggedIn === true && <div>
-                        <div className="datePicker">
-                            <h2>Run Date</h2>
-                            <DatePicker
-                            onChange={this.onChange}
-                            value={this.state.date}
-                            />
-                        </div>
+                        
                         <Router className="section stylings">
                             <div className="transformInline">
                                 <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
                                 <Route path='/SavedRuns' render={() => 
-                                <SavedRuns userId={this.state.user.id}/>} 
-                                />
+                                <SavedRuns userId={this.state.user.id} />} />
+                              
+                                <div className="datePicker">
+                                    <h2>Run Date</h2>
+                                    <DatePicker
+                                        onChange={this.onChange}
+                                        value={this.state.date}
+                                    />
+                                </div>
                                 <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
                                 <p className="or">or</p>
                                 <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
 
 
                                 <Route path='/Sunrise' render={() =>
-                                <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
+                                <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude}/>} />
 
                                 <div className="testingbackground">
                                 <Route path='/Sunset' render={() =>
-                                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
-                                    }/>
+                                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} userImage={this.state.userImage} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
+                                }/>
                                 </div>
 
                             </div>

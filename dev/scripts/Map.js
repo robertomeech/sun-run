@@ -1,5 +1,6 @@
 import React from 'react';
 // import Sunrise from './Sunrise.js';f
+import moment from 'moment';
 import axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
 import { compose, withProps, lifecycle, withState } from 'recompose';
@@ -51,19 +52,24 @@ const MapWithADirectionsRenderer = compose(
         }
     })
 )(props => {
-    console.log(props)
+    // console.log(props)
+
+
     return (
 
         <div>
             {props.sunriseTime}
             {props.directions && props.directions.routes[0].legs[0].distance.text}
             {props.directions && props.directions.routes[0].legs[0].duration.text}
+
+            {props.getTimeInterval(props.sunriseTime, 30)}
+
             <GoogleMap
                 defaultZoom={7}
                 defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
             >
                 {props.directions && <DirectionsRenderer directions={props.directions} />}
-            </GoogleMap>           
+            </GoogleMap>          
         </div>
     )
 }

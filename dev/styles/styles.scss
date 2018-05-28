@@ -10,6 +10,7 @@ color: white;
 //   background: linear-gradient(to left, $orange, $yellow, $beige);
 background:skyblue;
   background-repeat: none;
+  overflow-x:hidden;
 }
 
 h1, h2, h3, h4 {
@@ -327,6 +328,26 @@ select {
   }
 
   
+}
+
+.savedRunsContainer{
+    background:$orange;
+    .savedRun{
+        background:$pink;
+        h3{
+            font-size:20px;
+        }
+    }
+}
+
+.userImage{
+    position:absolute;
+    top:18px;
+    right:180px;
+    transition:all 0.2s ease-in-out;
+    &:hover{
+        transform:scale(1.2);
+    }
 }
 
 

@@ -54,14 +54,14 @@ const MapWithADirectionsRenderer = compose(
     console.log(props)
     return (
 
-        <div>
-            {props.sunriseTime}
-            {props.directions && props.directions.routes[0].legs[0].distance.text}
-            {props.directions && props.directions.routes[0].legs[0].duration.text}
+        <div className="destinationDetails">
+                <h3>{props.sunriseTime}</h3>
+                <h3>{props.directions && props.directions.routes[0].legs[0].distance.text}</h3>
+                <h3>{props.directions && props.directions.routes[0].legs[0].duration.text}</h3>
             <GoogleMap
                 defaultZoom={7}
                 defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
-            >
+                >
                 {props.directions && <DirectionsRenderer directions={props.directions} />}
             </GoogleMap>           
         </div>

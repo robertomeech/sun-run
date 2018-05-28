@@ -87,7 +87,6 @@ h1 {
 }
 
 .signInOutButton {
-//   border: 1px solid white;
   border:none;
   border-radius:10px;
   background: transparent;
@@ -155,8 +154,7 @@ h1 {
 }
 
 .sunriseLink {
-  background: linear-gradient(to top right, $yellow, $beige);
-  color:black;
+  background: linear-gradient(to top right, $orange, $yellow, $beige);
   display:flex;
   flex-flow:column nowrap;
   border:none;
@@ -198,15 +196,20 @@ h1 {
 }
 .saveLink {
     background:$orange;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-top: 5%;
     border:none;
     border-radius:20px;
-    padding:15px 30px;
+    padding:10px 30px;
     color:white;
+    @include fontSize(16);
+    &:hover {
+      background:linear-gradient(to bottom right, $pink, $orange, $yellow);
+    }
 }
 
 // sunset styles
-
 
 .sunsetHeader {
   font-family: $pacifico;
@@ -299,8 +302,9 @@ select {
   }
 
   input[type=text] {
-    // background: orange;
-    background:black;
+    background: orange;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
     color: white;
     padding: 5px 10px;
     width: 300px;
@@ -317,7 +321,10 @@ select {
     color: white;
     @include fontSize(14);
     text-transform: uppercase;
-    padding: 5px 10px;
+    padding: 5px 15px;
+    letter-spacing: 1px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
     &:hover {
       background: $yellow;
       transform: all ease 0.3s;
@@ -342,19 +349,25 @@ select {
         width:300px;
         margin:15px auto;
         border-radius:10px;
-        .x{
-            height:20px;
+        button{
             position:absolute;
             top:10px;
             right:10px;
-            transition:all 0.3s ease-in-out;
-            &:hover{
-                transform:rotate(180deg);
-                
+            background:none;
+            border:none;
+
+            .x{
+                height:20px;
+                transition:all 0.3s ease-in-out;
+                &:hover{
+                    transform:rotate(90deg);
+
+    
+                }
             }
-        }
-        h3{
-            font-size:20px;
+            h3{
+                font-size:20px;
+            }
         }
     }
 }
@@ -369,7 +382,18 @@ select {
     }
 }
 
-
+.mapBottom {
+  background: linear-gradient(to bottom right, $orange, $yellow, $beige);
+  position: relative;
+  bottom: 20px;
+  z-index: -1;
+  ul {
+    padding-top: 20px;
+    text-align: left;
+    text-decoration: none;
+    @include fontSize(16);
+  }
+}
 
 
 
@@ -394,7 +418,8 @@ select {
   font-family: 'Montserrat', sans-serif;
   z-index: 30;
   @include fontSize(16);
-  color: black;
+  color: white;
+  margin-bottom: 20px;
 }
 .react-date-picker,
 .react-date-picker *,
@@ -410,7 +435,7 @@ select {
 }
 .react-date-picker__button {
   display: flex;
-  border: thin solid black;
+  border: thin solid white;
 }
 .react-date-picker__button__input {
   min-width: calc(4px + (4px * 3) +  4.32em  +  0.434em);
@@ -418,8 +443,8 @@ select {
   display: flex;
   padding: 0 2px;
   align-items: baseline;
-  background: $beige;
-  color: black;
+  background: $pink;
+  color: white;
   padding: 10px 20px;
 }
 .react-date-picker__button__input__divider {
@@ -433,7 +458,7 @@ select {
   border: 0;
   background: none;
   -moz-appearance: textfield;
-  color: black;
+  color: white;
 }
 .react-date-picker__button__input__input::-webkit-outer-spin-button,
 .react-date-picker__button__input__input::-webkit-inner-spin-button {
@@ -452,20 +477,26 @@ select {
   border: 0;
   // background: transparent;
   padding: 4px 6px;
-  background: $beige;
+  background: $pink;
 }
 .react-date-picker__button__icon:enabled {
   cursor: pointer;
 }
 .react-date-picker__button__icon:enabled:hover svg g,
 .react-date-picker__button__icon:enabled:focus svg g {
-  stroke: $pink;
+  stroke: $orange;
 }
+
+
 .react-date-picker__button__icon:disabled svg g {
   stroke: #6d6d6d;
 }
 .react-date-picker__button__icon svg {
   display: inherit;
+}
+
+.react-date-picker__button__icon svg g{
+  stroke: white;
 }
 .react-date-picker__calendar {
   width: 350px;
@@ -486,18 +517,18 @@ select {
 }
 
 .react-calendar__tile.react-calendar__month-view__days__day {
-  border: 1px solid black;
-  color: black;
-  background: $beige;
+  border: 1px solid white;
+  color: white;
+  background: $pink;
   position: relative;
   right: 80px;
   // background: white;
 }
 
 .react-calendar__month-view__weekdays__weekday, .react-calendar__navigation__label {
-  background: $beige;
-  border: 1px solid black;
-  color: black;
+  background: $pink;
+  border: 1px solid white;
+  color: white;
   position: relative;
   right: 80px;
 }
@@ -508,22 +539,13 @@ select {
 .react-calendar__navigation__next2-button {
   position: relative;
   right: 80px;
-  background: $yellow;
-  border: 1px solid black;
+  background: $pink;
+  border: 1px solid white;
 
 }
 
 .react-calendar__navigation__arrow {
-  color: black;
+  color: white;
 }
 
 
-
-
-
-
-.testing {
-    height: 100px;
-    margin-top: 200px;
-    z-index: 20000;
-}

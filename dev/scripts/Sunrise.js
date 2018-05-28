@@ -11,13 +11,19 @@ class Sunrise extends React.Component {
         super();
         this.state={
             destination: "",
-            finalDestination: "Toronto"
+            finalDestination: "Toronto",
+            date: ''
         }
         // final destination initializes the map with a destination of Toronto
         // this will only change once the user enters a destination
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+    componentDidMount(){
+        this.setState({
+            date:this.props.date
+        })
     }
        
     handleChange(e){
@@ -31,6 +37,17 @@ class Sunrise extends React.Component {
         this.setState({
             finalDestination: destClone
         })
+    }
+    runData(x,y,z) {
+        let runData = {
+            // leaveTime: props.getTimeInterval(props.sunriseTime, durationThree),
+            leaveTime: x,
+            // runTime: props.directions && props.directions.routes[0].legs[0].duration.text,
+            runTime: y,
+            date: z
+
+        }
+        return runData;
     }
     getTimeInterval(sunriseTime, runDuration) {
         let end = moment(sunriseTime, "HH:mm");
@@ -48,15 +65,6 @@ class Sunrise extends React.Component {
         this.getLandmark()
     }
 
-    // runData() {
-    //     let runData = {
-    //         leaveTime: this.getTimeInterval(),
-    //         // runTime: this.state.runDuration,
-    //         date: this.props.sunriseDate
-    //     }
-    //     return runData;
-    // }
-
     render() {
         console.log(this.state.finalDestination)
         return(
@@ -69,7 +77,7 @@ class Sunrise extends React.Component {
                         <input type="submit" name="submit" value="search" />
                     </form>
                     <div id="map"></div>
-                    <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} getTimeInterval={this.getTimeInterval}sunriseTime={this.props.sunriseTime} />
+                    <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} getTimeInterval={this.getTimeInterval} date={this.state.date} sunriseTime={this.props.sunriseTime} runDataPush={this.props.runDataPush} runData={this.runData}/>
                 </div>
             </div>
         )

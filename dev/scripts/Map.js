@@ -62,22 +62,24 @@ const MapWithADirectionsRenderer = compose(
      durationThree = durationTwo[0]
     console.log(durationThree)
     }
+    
 
     return (
 
-        <div>
-            {props.sunriseTime}
-            {props.directions && props.directions.routes[0].legs[0].distance.text}
-            {props.directions && props.directions.routes[0].legs[0].duration.text}
-            {props.getTimeInterval(props.sunriseTime, durationThree)}
-
+        <div className="mapBottom">
+            <ul>
+                <li>Run Distance: {props.directions && props.directions.routes[0].legs[0].distance.text}</li>
+                <li>Run Duration: {props.directions && props.directions.routes[0].legs[0].duration.text}</li>
+                <li>Leave By: {props.getTimeInterval(props.sunriseTime, durationThree)}</li>
+            </ul>
+            
             <GoogleMap
                 defaultZoom={7}
                 defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
                 >
                 {props.directions && <DirectionsRenderer directions={props.directions} />}
-            </GoogleMap>  
-            <button className="saveLink" onClick={() => {this.props.runDataPush(this.runData())}}>Save Run</button>   
+            </GoogleMap>      
+            <button className="saveLink" onClick={() => { props.runDataPush(props.runData(props.getTimeInterval(props.sunriseTime, durationThree), props.directions && props.directions.routes[0].legs[0].duration.text, props.date )) }}>Save Run</button>
         </div>
     )
 }

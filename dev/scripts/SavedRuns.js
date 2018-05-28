@@ -57,9 +57,6 @@ class SavedRuns extends React.Component {
                         <h3>Date: {run.run.date}</h3>
                         <h3>Time to leave: {run.run.leaveTime}</h3>
                         <h3>Run Duration: {run.run.runTime}</h3>
-                        <button onClick={() => {
-                            console.log('clicked the button')
-                        }}>Remove run</button>
                     </div>
 
                     )

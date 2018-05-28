@@ -58,6 +58,10 @@ class Sunrise extends React.Component {
                     <MapWithADirectionsRenderer lat={this.props.lat} lng={this.props.long} destination={this.state.finalDestination} sunriseTime={this.props.sunriseTime}/>
                     <button className="saveLink" >Save Run</button>
                     {/* <p>{this.getTimeInterval()}</p> */}
+
+                
+
+
                 </div>
             </div>
         )

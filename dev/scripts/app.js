@@ -6,7 +6,7 @@ import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js'
 import axios from 'axios';
 import firebase, {auth, provider} from 'firebase';
-
+import SavedRuns from './SavedRuns.js'
 import moment from 'moment'
 // import { FirebaseAuth } from 'react-firebaseui';
 
@@ -258,12 +258,11 @@ class App extends React.Component {
                     {this.state.loggedIn===true ? 
                     <div>
                         <button className="signInOutButton"onClick={this.logout}>Sign Out</button>
-                        <Router>
+                        {/* <Router>
                             <div>
-                                <Link className='userImage' to='/savedRuns'> <img className='userIMG'src={this.state.userImage} alt=""/></Link>
-                                <Route path='/savedRuns' />
+                                
                             </div>
-                        </Router>
+                        </Router> */}
                     </div>
                     : null}
                     <h1>Sun Run</h1>
@@ -290,10 +289,11 @@ class App extends React.Component {
                                 <Route path='/Sunrise' render={() =>
                                 <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} />} />
                                 <div className="testingbackground">
-                                    <Route path='/Sunset' render={() =>
-                                    <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
+                                <Route path='/Sunset' render={() =>
+                                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
                                     }/>
                                 </div>
+
                             </div>
                         </Router>
                     </div>}

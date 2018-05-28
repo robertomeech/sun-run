@@ -31,7 +31,7 @@ class SavedRuns extends React.Component {
 
             const savedRun = [];
 
-            for (let run in data) {
+            for(let run in data) {
                 data[run].key = run
                 savedRun.push(data[run])
             }
@@ -55,6 +55,16 @@ class SavedRuns extends React.Component {
         return(
             <div>
                 <h1>Hello World</h1>
+
+                <div>
+                    {this.state.savedRuns.map((run)=>{
+                        return(
+                            <div>
+                                
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         )
     }

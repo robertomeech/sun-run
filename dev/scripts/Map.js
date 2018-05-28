@@ -85,18 +85,17 @@ const MapWithADirectionsRenderer = compose(
      durationThree = durationTwo[0]
     console.log(durationThree)
     }
-    
 
     
 
 
     return (
 
-        <div>
+        <div className="routeInfo">
+            {props.sunriseTime}
             {props.directions && props.directions.routes[0].legs[0].distance.text}
             {props.directions && props.directions.routes[0].legs[0].duration.text}
             {props.getTimeInterval(props.sunriseTime, durationThree)}
-
 
 
             <GoogleMap
@@ -104,8 +103,8 @@ const MapWithADirectionsRenderer = compose(
                 defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
                 >
                 {props.directions && <DirectionsRenderer directions={props.directions} />}
-            </GoogleMap>      
-            <button className="saveLink" onClick={() => { props.runDataPush(props.runData(props.getTimeInterval(props.sunriseTime, durationThree), props.directions && props.directions.routes[0].legs[0].duration.text, props.date )) }}>Save Run</button>
+            </GoogleMap>  
+            <button className="saveLink" onClick={() => { props.runDataPush(props.runData(props.getTimeInterval(props.sunriseTime, durationThree), props.directions && props.directions.routes[0].legs[0].duration.text, props.date)) }}>Save Run</button>         
         </div>
     )
 }

@@ -246,7 +246,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="wrapper">
                 <div className="wrapper">
                     <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
                     {this.state.loggedIn===true ? 

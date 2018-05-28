@@ -53,8 +53,17 @@ class SavedRuns extends React.Component {
     
     render(){
         return(
-            <div>
-                <h1>Hello World</h1>
+            <div className='savedRunsContainer'>
+                {this.state.savedRuns.map((run) => {
+                    return(
+                    <div className='savedRun'>
+                        <h3>Date: {run.run.date}</h3>
+                        <h3>Time to leave: {run.run.leaveTime}</h3>
+                        <h3>Run Duration: {run.run.runTime}</h3>
+                    </div>
+
+                    )
+                })}
             </div>
         )
     }

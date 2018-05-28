@@ -248,6 +248,7 @@ class App extends React.Component {
         return (
             <div>
                 <div className="wrapper">
+                
                     <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
                     {this.state.loggedIn===true ? 
                         <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
@@ -259,7 +260,6 @@ class App extends React.Component {
                             <button className="signInOutButton signInButton"onClick={this.loginWithGoogle}>Login with Google</button>
                         </div>
                     }
-
                     {this.state.loggedIn === true && <div>
                         
                         <Router className="section stylings">
@@ -267,8 +267,7 @@ class App extends React.Component {
                                 <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
                                 <Route path='/SavedRuns' render={() => 
                                 <SavedRuns userId={this.state.user.id} />} />
-
-
+                              
                                 <div className="datePicker">
                                     <h2>Run Date</h2>
                                     <DatePicker
@@ -280,14 +279,13 @@ class App extends React.Component {
                                 <p className="or">or</p>
                                 <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
 
-
                                 <Route path='/Sunrise' render={() =>
                                 <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} date={this.state.userDate}runDataPush={this.runDataPush} />} />
 
                                 <div className="testingbackground">
                                 <Route path='/Sunset' render={() =>
                                 <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} userImage={this.state.userImage} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
-                                    }/>
+                                }/>
                                 </div>
 
                             </div>

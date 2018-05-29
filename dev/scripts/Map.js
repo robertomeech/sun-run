@@ -55,16 +55,12 @@ const MapWithADirectionsRenderer = compose(
     let durationThree
 
     if(props.directions !== null){
-    console.log(props.directions && props.directions.routes[0].legs[0].duration.text)
      durationOne = props.directions && props.directions.routes[0].legs[0].duration.text
      durationTwo = durationOne.split(" mins")
-        console.log(durationTwo)
      durationThree = durationTwo[0]
-    console.log(durationThree)
     }
 
     return (
-
         <div className="mapBottom">
             <ul>
                 <li>Run Distance: {props.directions && props.directions.routes[0].legs[0].distance.text}</li>

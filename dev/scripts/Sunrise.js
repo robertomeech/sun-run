@@ -61,7 +61,6 @@ class Sunrise extends React.Component {
     }
 
     render() {
-        console.log(this.state.finalDestination)
         return(
             <div>
                 <div className="sunriseSection clearfix">

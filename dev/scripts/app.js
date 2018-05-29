@@ -39,7 +39,7 @@ class App extends React.Component {
         year:'',
         correctSunset:'',
         user: '',
-        userImage: '',
+        userImage: ''
       }
 
     this.onChange = this.onChange.bind(this);
@@ -99,30 +99,24 @@ class App extends React.Component {
           let timeOne = splitDate.splice(5,1)
           let newSplit2 = timeOne[0].split('-');
           let newSplit3 = newSplit2.pop();
-          let newSplit4 = newSplit3.split('0')[1]
-          let correctHour = splitSunsetTime - newSplit4  
+          let newSplit4 = newSplit3.split('0')[1];
+          let correctHour = splitSunsetTime - newSplit4  ;
 
-          let sunsetHour = correctHour + 12
-        //   console.log(sunsetHour)
+          let sunsetHour = correctHour + 12;
+          let correctSunsetHour = sunsetHour + `:` + splitSunsetMinute + `:` + `00`;
+          let correctSunsetTime = correctHour + `:` + splitSunsetMinute + `PM`;
 
-          let correctSunsetHour = sunsetHour + `:` + splitSunsetMinute + `:` + `00`
-        //   console.log(correctSunsetHour)
+          let sunriseTime = res.data.results.sunrise;
+          let splitSunriseTime = sunriseTime.split(':')[0];
+          let splitSunriseMinute = sunriseTime.split(':')[1];
 
-          let correctSunsetTime = correctHour + `:` + splitSunsetMinute + `PM`
+          let correctSunriseHour = splitSunriseTime - newSplit4;
+          let correctSunriseTime = correctSunriseHour + `:` + splitSunriseMinute + `AM`;
 
-          let sunriseTime = res.data.results.sunrise
-          let splitSunriseTime = sunriseTime.split(':')[0]
-          let splitSunriseMinute = sunriseTime.split(':')[1]
-
-          let correctSunriseHour = splitSunriseTime - newSplit4
-
-          let correctSunriseTime = correctSunriseHour + `:` + splitSunriseMinute + `AM`
-
-          let month = this.state.date.getMonth() + 1
+          let month = this.state.date.getMonth() + 1;
           let year = this.state.date.getUTCFullYear();
           let day = this.state.date.getDate();
 
-        //   console.log(month + '-' + day + '-' + year)
           this.setState({
             sunsetTime: correctSunsetTime,
             sunriseTime: correctSunriseTime,
@@ -131,7 +125,6 @@ class App extends React.Component {
             day: day,
             year: year,
             userDate: month + '-' + day + '-' + year
-            
           })
         })
     }
@@ -247,14 +240,14 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="wrapper">
                 <div className="wrapper">
                 
                     <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
                     {this.state.loggedIn===true ? 
                         <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
                     <h1>Sun Run</h1>
-                    <img src="../../images/sun.svg" className="sunImage" alt=""/>
+                    <img src="../../images/sun.svg" className="sunImage" alt="A big yellow sun icon behind the title."/>
                     {this.state.loggedIn === false && 
                         <div>
                             <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can select a chosen destination to watch the beautiful sunrise. Choose a date to get started!</p>
@@ -265,20 +258,23 @@ class App extends React.Component {
                         
                         <Router className="section stylings">
                             <div className="transformInline">
-                                <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
+                                <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="Google Profile image of the user is shown" /></Link>
                                 <Route path='/SavedRuns' render={() => 
                                 <SavedRuns userId={this.state.user.id} />} />
-                              
-                                <div className="datePicker">
-                                    <h2>Run Date</h2>
-                                    <DatePicker
-                                        onChange={this.onChange}
-                                        value={this.state.date}
-                                    />
+
+                                <div className="sideBar">
+                                    <div className="datePicker">
+                                        <h2>Run Date</h2>
+                                        <DatePicker
+                                            onChange={this.onChange}
+                                            value={this.state.date}
+                                            />
+                                    </div>
+                                    
+                                    <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
+                                    <p className="or">or</p>
+                                    <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
                                 </div>
-                                <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
-                                <p className="or">or</p>
-                                <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
 
                                 <Route path='/Sunrise' render={() =>
                                 <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} date={this.state.userDate}runDataPush={this.runDataPush} />} />

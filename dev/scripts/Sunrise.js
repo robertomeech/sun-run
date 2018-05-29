@@ -55,11 +55,7 @@ class Sunrise extends React.Component {
         return end.format("H:mm")
     }
 
-    getTimeInterval(sunriseTime, runDuration) {
-        let end = moment(sunriseTime, "HH:mm");
-        end.subtract(runDuration, 'minutes');
-        return end.format("H:mm")
-    }
+
 
     handleClick(){
         this.getLandmark()
@@ -71,6 +67,7 @@ class Sunrise extends React.Component {
             <div>
                 <div className="sunriseSection clearfix">
                     <h2 className="sunriseHeader">Sunrise</h2>
+                    <img className="sunriseIMG" src="../../images/sunrise.svg" alt="A white sunrise icon."/>
                     <p>The sunrise will be at {this.props.sunriseTime}</p>
                     <form action="#" onSubmit={this.handleSubmit}>
                         <input type="text" name="destination" onChange={this.handleChange} value={this.state.destination}placeholder="enter a landmark"/>

@@ -52,7 +52,7 @@ class SavedRuns extends React.Component {
                     return(
                     <div className='savedRun' key={run.key}>
                         <button onClick={() => this.removeFirebaseItem(run.key)}>
-                            <img src="../../images/x.svg" className='x' alt=""/>
+                            <img src="../../images/x.svg" className='x' alt="A little 'x' icon to delete the saved run."/>
                         </button>
                         <h3>Date: {run.run.date}</h3>
                         <h3>Time to leave: {run.run.leaveTime}</h3>

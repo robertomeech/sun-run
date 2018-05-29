@@ -11,9 +11,7 @@ class Sunset extends React.Component {
         super();
         this.state = {
             runDuration:'',
-
-            time: new Date(),
-
+            time: new Date()
             }
     this.runDurationChange = this.runDurationChange.bind(this)
     }
@@ -41,11 +39,14 @@ class Sunset extends React.Component {
 
     
     render() {
+
+
         
         return (
-            <div>
-                <div className="sunsetSection">
+            <div className="wrapper">
+                <div className="sunsetSection wrapper">
                     <h2 className="sunsetHeader">Sunset</h2>
+                    <img className="sunsetIMG" src="../../images/sunset.svg" alt="A white sunset icon."/>
                     <p>The Sunset will be at {this.props.sunsetTime}</p>
                     <h2>Run Duration</h2>
                     <div className="transformInline">
@@ -62,6 +63,7 @@ class Sunset extends React.Component {
                         <p>Minutes</p>
                     </div>
                     <p>You need to leave by {this.getTimeInterval()}PM</p>
+
                     <h3>Countdown to tonights sunset</h3>
                     <h4>
                         {this.props.sunsetDate ? <RNMomentCountDown className="countdown" toDate={this.props.sunsetDate + this.props.largeSunsetTime} sourceFormatMask='MM-DD-YYYY HH:mm:ss' /> : null}

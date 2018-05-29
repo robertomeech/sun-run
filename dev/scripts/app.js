@@ -54,20 +54,20 @@ class App extends React.Component {
     onChange(dateClicked) {
       
       this.setState({
-        date: dateClicked,
+        userDate: dateClicked,
       })
 
-      this.getAxios()
-      let month = dateClicked.getMonth() + 1
-      let year = dateClicked.getUTCFullYear();
-      let day = dateClicked.getDate();
-
+      let monthX = dateClicked.getMonth() + 1
+      let yearX = dateClicked.getUTCFullYear();
+      let dayX = dateClicked.getDate();
+      
       this.setState({
-        month:month,
-        day:day,
-        year:year,
-        userDate: month + '-' + day + '-' + year
-      })   
+          month:monthX,
+          day:dayX,
+          year:yearX,
+          userDate: monthX + '-' + dayX + '-' + yearX
+        })   
+        this.getAxios()
     }
 
     handleChange(e, field) {

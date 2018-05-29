@@ -57,17 +57,7 @@ class App extends React.Component {
         userDate: dateClicked,
       })
 
-      let monthX = dateClicked.getMonth() + 1
-      let yearX = dateClicked.getUTCFullYear();
-      let dayX = dateClicked.getDate();
       
-      this.setState({
-          month:monthX,
-          day:dayX,
-          year:yearX,
-          userDate: monthX + '-' + dayX + '-' + yearX
-        })   
-        this.getAxios()
     }
 
     handleChange(e, field) {

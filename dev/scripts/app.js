@@ -170,7 +170,6 @@ class App extends React.Component {
     componentDidMount() {
         
         navigator.geolocation.getCurrentPosition(this.success);
-        // need to put user info in template litereals ${ }/
         this.dbRef = firebase.database().ref()
         
         
@@ -248,26 +247,34 @@ class App extends React.Component {
         return (
             <div className="wrapper">
                 <div className="wrapper">
-                
                     <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
+
+
+                    {/* if user is logged in, signout button is displayed */}
                     {this.state.loggedIn===true ? 
                         <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
+
                     <h1>Sun Run</h1>
                     <img src="../../images/sun.svg" className="sunImage" alt=""/>
+
+
+                    {/* displays a blurb about the app before the user signs in */}
                     {this.state.loggedIn === false && 
                         <div>
                             <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can select a chosen destination to watch the beautiful sunrise. Choose a date to get started!</p>
                             <button className="signInOutButton signInButton"onClick={this.loginWithGoogle}>Login with Google</button>
                         </div>
                     }
+
+                    {/* if user is logged in, main app displays */}
                     {this.state.loggedIn === true && <div>
-                        
                         <Router className="section stylings">
                             <div className="transformInline">
                                 <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
                                 <Route path='/SavedRuns' render={() => 
                                 <SavedRuns userId={this.state.user.id} />} />
 
+                                {/* the sideBar contains the date picker and our two buttons to select run time */}
                                 <div className="sideBar">
                                     <div className="datePicker">
                                         <h2>Run Date</h2>

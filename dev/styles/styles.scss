@@ -5,9 +5,7 @@
 
 body {
     font-family: $body;
-// background: $pink;
     color: white;
-//   background: linear-gradient(to left, $orange, $yellow, $beige);
     background:skyblue;
     background-repeat: none;
     overflow-x:hidden;
@@ -20,10 +18,8 @@ h1, h2, h3, h4 {
 }
 
 h2 {
-  // text-transform: uppercase;
   @include fontSize(20);
   letter-spacing: 1px;
-  // border-bottom: 1px solid 
 }
 
 p {
@@ -240,7 +236,6 @@ h1 {
   font-family: $pacifico;
   margin-top: 50px;
   @include fontSize(90);
-//   text-shadow: makelongshadow($pink); 
   @media(max-width: 350px) {
     @include fontSize (80);
   }
@@ -262,14 +257,12 @@ h1 {
       width:100%;
   }
   
-  // border: 1px solid white;
   button {
     margin-top: 20px;
     margin-bottom: 50px;
   }
   h2 {
     margin-bottom: 20px;
-    // text-transform: uppercase;
     margin-top: 20px;
   }
   h3 {
@@ -332,7 +325,6 @@ select {
     font-family: $pacifico;
     margin-top: 20px;
     @include fontSize(90);
-    // text-shadow: makelongshadow($yellow); 
     @media(max-width: 350px) {
       @include fontSize (80);
     }
@@ -473,7 +465,6 @@ select {
   box-sizing: border-box;
 }
 .react-date-picker--disabled {
-  // background-color: #f0f0f0;
   color: #6d6d6d;
 }
 .react-date-picker__button {
@@ -518,7 +509,6 @@ select {
 }
 .react-date-picker__button__icon {
   border: 0;
-  // background: transparent;
   padding: 4px 6px;
   background: $pink;
 }
@@ -565,7 +555,6 @@ select {
   background: $pink;
   position: relative;
   right: 80px;
-  // background: white;
 }
 
 .react-calendar__month-view__weekdays__weekday, .react-calendar__navigation__label {

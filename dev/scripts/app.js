@@ -6,8 +6,9 @@ import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js';
 import axios from 'axios';
 import firebase, {auth, provider} from 'firebase';
-import SavedRuns from './SavedRuns.js'
-import moment from 'moment'
+import SavedRuns from './SavedRuns.js';
+import moment from 'moment';
+import Footer from './Footer.js'
 
 
 // Initialize Firebase
@@ -291,7 +292,9 @@ class App extends React.Component {
                             </div>
                         </Router>
                     </div>}
-                </div>     
+                 
+                </div> 
+            <Footer />
             </div>
         )
     }

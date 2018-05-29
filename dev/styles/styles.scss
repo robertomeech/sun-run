@@ -275,7 +275,8 @@ select {
     background-size: 25%;
     background-position-x: 90%;
     background-position-y: 50%;
-    padding-right: 10px;
+    padding-right: 15px;
+    padding-left: 5px;
     border-radius: 0; 
     @include fontSize(16);
     color: white;
@@ -362,12 +363,35 @@ select {
 .savedRunsContainer{
     background:$orange;
     .savedRun{
-        background:$pink;
-        position:relative;
-        padding:15px;
-        width:300px;
-        margin:15px auto;
-        border-radius:10px;
+      background:$pink;
+      position:relative;
+      padding: 30px 15px 15px 15px;
+      width:300px;
+      margin:15px auto;
+      border-radius:10px;
+
+      .shareRun {
+        position: relative;
+        margin-bottom: 0;
+        p {
+          text-align: left;
+          padding-left: 35px;
+        }
+        .twitterIcon {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+        .twitterShare {
+          height: 40px;
+          position: absolute;
+          width: 250px;
+          // background: red;
+          bottom: 0;
+
+        }
+      }
+
         h3{
             @include fontSize(16);
             font-weight: lighter;
@@ -387,11 +411,10 @@ select {
 
     
                 }
+              }
             }
-           
+          }
         }
-    }
-}
 
 .userImage{
     position:absolute;
@@ -415,7 +438,26 @@ select {
   }
 }
 
+footer {
+  margin-top: 50px;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  a:nth-of-type(2), a:first-of-type, a:nth-of-type(3) {
+    border-bottom: 1px solid white;
+    &:hover {
+      color: $beige;
+      border-bottom: 1px solid $beige;
+    }
+  }
 
+  img {
+    margin: 0;
+    padding: 0;
+    padding-left: 5px;
+  }
+}
 
 
 

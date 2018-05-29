@@ -6,8 +6,8 @@ import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js';
 import axios from 'axios';
 import firebase, {auth, provider} from 'firebase';
-import SavedRuns from './SavedRuns.js'
-import moment from 'moment'
+import SavedRuns from './SavedRuns.js';
+import moment from 'moment';
 
 
 // Initialize Firebase
@@ -47,8 +47,8 @@ class App extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.logout = this.logout.bind(this);
-    this.loginWithGoogle = this.loginWithGoogle.bind(this)
-    this.runDataPush = this.runDataPush.bind(this)
+    this.loginWithGoogle = this.loginWithGoogle.bind(this);
+    this.runDataPush = this.runDataPush.bind(this);
     }
 
     onChange(dateClicked) {
@@ -56,6 +56,7 @@ class App extends React.Component {
       this.setState({
         date: dateClicked,
       })
+      this.getAxios();
     }
 
     handleChange(e, field) {
@@ -69,7 +70,7 @@ class App extends React.Component {
         params: {
           lat: this.state.latitude,
           lng: this.state.longitude,
-          date: this.state.date,
+          date: this.state.date
         }
       })
         .then((res) => {
@@ -118,7 +119,6 @@ class App extends React.Component {
             day: day,
             year: year,
             userDate: month + '-' + day + '-' + year
-            
           })
         })
     }
@@ -138,8 +138,7 @@ class App extends React.Component {
         function writeUserData(userId, name, email, imageUrl) {
             firebase.database().ref('users/' + userId).set({
                 username: user.displayName,
-                email: user.email,
-
+                email: user.email
             });
         }
         console.log("success")

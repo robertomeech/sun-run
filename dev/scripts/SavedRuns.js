@@ -11,7 +11,7 @@ class SavedRuns extends React.Component {
             userImage:''
         }
         this.getDataFromFirebase = this.getDataFromFirebase.bind(this);
-        this.removeFirebaseItem = this.removeFirebaseItem.bind(this)
+        this.removeFirebaseItem = this.removeFirebaseItem.bind(this);
     }
 
     getDataFromFirebase(){

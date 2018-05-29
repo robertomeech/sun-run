@@ -16,9 +16,9 @@ class Sunrise extends React.Component {
         }
         // final destination initializes the map with a destination of Toronto
         // this will only change once the user enters a destination
-        this.handleClick = this.handleClick.bind(this)
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount(){
         // this is just so we can push the date to the map component

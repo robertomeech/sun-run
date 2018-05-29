@@ -40,6 +40,7 @@
     "react-input-calendar": "^0.5.3",
     "react-moment": "^0.7.0",
     "react-moment-countdown": "^0.3.0",
-    "react-native-moment-countdown": "0.0.2"
+    "react-native-moment-countdown": "0.0.2",
+    "react-share": "^2.1.1"
   }
 }

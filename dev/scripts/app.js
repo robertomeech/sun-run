@@ -5,9 +5,16 @@ import { BrowserRouter as Router, Route, Link, } from 'react-router-dom';
 import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js';
 import axios from 'axios';
+<<<<<<< HEAD
 import firebase, { auth, provider } from 'firebase';
 import SavedRuns from './SavedRuns.js';
 import moment from 'moment';
+=======
+import firebase, {auth, provider} from 'firebase';
+import SavedRuns from './SavedRuns.js';
+import moment from 'moment';
+import Footer from './Footer.js'
+>>>>>>> abb42f0e7b3ce14caa4d676e71b62bc51197b380
 
 
 // Initialize Firebase
@@ -24,31 +31,31 @@ firebase.initializeApp(config);
 
 class App extends React.Component {
     constructor() {
-        super();
-        this.state = {
-            date: new Date(),
-            latitude: '',
-            longitude: '',
-            sunsetTime: '',
-            sunriseTime: '',
-            loggedIn: false,
-            userDate: '',
-            month: '',
-            day: '',
-            year: '',
-            correctSunset: '',
-            user: '',
-            userImage: '',
-        }
+      super();
+      this.state = {
+        date: new Date(),
+        latitude:'',
+        longitude:'',
+        sunsetTime:'',
+        sunriseTime:'',
+        loggedIn: false,
+        userDate:'',
+        month: '',
+        day: '',
+        year:'',
+        correctSunset:'',
+        user: '',
+        userImage: ''
+      }
 
-        this.onChange = this.onChange.bind(this);
-        this.success = this.success.bind(this);
-        this.getAxios = this.getAxios.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.logout = this.logout.bind(this);
-        this.loginWithGoogle = this.loginWithGoogle.bind(this);
-        this.runDataPush = this.runDataPush.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.success = this.success.bind(this);
+    this.getAxios = this.getAxios.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.logout = this.logout.bind(this);
+    this.loginWithGoogle = this.loginWithGoogle.bind(this)
+    this.runDataPush = this.runDataPush.bind(this)
     }
 
     onChange(dateClicked) {
@@ -66,69 +73,58 @@ class App extends React.Component {
         this.setState(newState);
     }
 
-    getAxios() {
-        axios.get('https://api.sunrise-sunset.org/json', {
-            params: {
-                lat: this.state.latitude,
-                lng: this.state.longitude,
-                date: this.state.date,
-            }
+    getAxios(){
+      axios.get('https://api.sunrise-sunset.org/json', {
+        params: {
+          lat: this.state.latitude,
+          lng: this.state.longitude,
+          date: this.state.date,
+        }
+      })
+        .then((res) => {
+          // correcting the sunrise/sunset times so that they are no longer in UTC
+
+          let sunsetTime = res.data.results.sunset
+          let splitSunsetTime = sunsetTime.split(':')[0]
+          let splitSunsetMinute = sunsetTime.split(':')[1]
+          
+          // isolating user date
+          let userDate = Date();
+  
+          let splitDate =  userDate.split(' ');
+          let timeOne = splitDate.splice(5,1)
+          let newSplit2 = timeOne[0].split('-');
+          let newSplit3 = newSplit2.pop();
+          let newSplit4 = newSplit3.split('0')[1];
+          let correctHour = splitSunsetTime - newSplit4  ;
+
+          let sunsetHour = correctHour + 12;
+          let correctSunsetHour = sunsetHour + `:` + splitSunsetMinute + `:` + `00`;
+          let correctSunsetTime = correctHour + `:` + splitSunsetMinute + `PM`;
+
+          let sunriseTime = res.data.results.sunrise;
+          let splitSunriseTime = sunriseTime.split(':')[0];
+          let splitSunriseMinute = sunriseTime.split(':')[1];
+
+          let correctSunriseHour = splitSunriseTime - newSplit4;
+          let correctSunriseTime = correctSunriseHour + `:` + splitSunriseMinute + `AM`;
+
+          let month = this.state.date.getMonth() + 1;
+          let year = this.state.date.getUTCFullYear();
+          let day = this.state.date.getDate();
+
+          this.setState({
+            sunsetTime: correctSunsetTime,
+            sunriseTime: correctSunriseTime,
+            correctSunset: correctSunsetHour,
+            month: month,
+            day: day,
+            year: year,
+            userDate: month + '-' + day + '-' + year
+          })
         })
-            .then((res) => {
-                // correcting the sunrise/sunset times so that they are no longer in UTC
-
-                let sunsetTime = res.data.results.sunset
-                // console.log(sunsetTime)
-                let splitSunsetTime = sunsetTime.split(':')[0]
-                console.log(splitSunsetTime)
-                let splitSunsetMinute = sunsetTime.split(':')[1]
-
-                // isolating user date
-                let userDate = Date();
-
-                let splitDate = userDate.split(' ');
-                let timeOne = splitDate.splice(5, 1)
-                let newSplit2 = timeOne[0].split('-');
-                let newSplit3 = newSplit2.pop();
-                let newSplit4 = newSplit3.split('0')[1]
-                let correctHour = splitSunsetTime - newSplit4
-
-                let sunsetHour = correctHour + 12
-                //   console.log(sunsetHour)
-
-                let correctSunsetHour = sunsetHour + `:` + splitSunsetMinute + `:` + `00`
-                //   console.log(correctSunsetHour)
-                // console.log(correctSunsetHour)
-
-                let correctSunsetTime = correctHour + `:` + splitSunsetMinute + `PM`
-                // console.log(correctSunsetTime)
-
-                let sunriseTime = res.data.results.sunrise
-                console.log(sunriseTime)
-                let splitSunriseTime = sunriseTime.split(':')[0]
-
-                let splitSunriseMinute = sunriseTime.split(':')[1]
-
-                let correctSunriseHour = splitSunriseTime - newSplit4
-
-                let correctSunriseTime = correctSunriseHour + `:` + splitSunriseMinute + `AM`
-
-                let month = this.state.date.getMonth() + 1
-                let year = this.state.date.getUTCFullYear();
-                let day = this.state.date.getDate();
-
-                //   console.log(month + '-' + day + '-' + year)
-                this.setState({
-                    sunsetTime: correctSunsetTime,
-                    sunriseTime: correctSunriseTime,
-                    correctSunset: correctSunsetHour,
-                    month: month,
-                    day: day,
-                    year: year,
-                    userDate: month + '-' + day + '-' + year
-
-                })
-            })
+            
+        
     }
 
     success(position) {
@@ -297,7 +293,9 @@ class App extends React.Component {
                             </div>
                         </Router>
                     </div>}
-                </div>
+                 
+                </div> 
+            <Footer />
             </div>
         )
     }

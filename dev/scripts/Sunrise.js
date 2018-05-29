@@ -67,6 +67,7 @@ class Sunrise extends React.Component {
             <div>
                 <div className="sunriseSection clearfix">
                     <h2 className="sunriseHeader">Sunrise</h2>
+                    <img className="sunriseIMG" src="../../images/sunrise.svg" alt=""/>
                     <p>The sunrise will be at {this.props.sunriseTime}</p>
                     <form action="#" onSubmit={this.handleSubmit}>
                         <input type="text" name="destination" onChange={this.handleChange} value={this.state.destination}placeholder="enter a landmark"/>

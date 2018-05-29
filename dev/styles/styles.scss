@@ -42,6 +42,7 @@ p {
     }
 }
 
+
 @function makelongshadow($pink) {
   $val: 0px 0px $orange;
   @for $i from 1 through 700 {
@@ -89,14 +90,6 @@ h1 {
   }
 }
 
-.userIMG{
-    height:40px;
-    width:40px;
-    border-radius:50%;
-    float:right;
-    margin-right: 80%;
-}
-
 .signInOutButton {
   border:none;
   border-radius:10px;
@@ -108,7 +101,9 @@ h1 {
   background: linear-gradient(to right, $yellow, $orange);
   background: $yellow;
   margin-bottom: 20px;
-  float: right;
+  position: absolute;
+  top: 10px;
+  right: 30px;
   @include fontSize(16);
   &:hover {
     background: linear-gradient(to right, rgba(241,231,103,1) 0%, rgb(255, 109, 0)100%);
@@ -128,6 +123,19 @@ h1 {
 .transformInline {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.userIMG{
+  height:40px;
+  width:40px;
+  border-radius:50%;
+  position:absolute;
+  top:10px;
+  right:180px;
+  transition:all 0.2s ease-in-out;
+  &:hover{
+      transform:scale(1.2);
+  }
 }
 
 
@@ -232,6 +240,11 @@ h1 {
   }
 }
 
+.sunriseIMG {
+  height: 150px;
+  margin-top: -30px;
+}
+
 .sunsetSection {
   background: linear-gradient(to bottom right, $orange, $pink);
   margin-bottom: 20px;
@@ -262,6 +275,11 @@ h1 {
   }
 }
 
+.sunsetIMG {
+  height: 160px;
+  margin-top: -40px;
+}
+
 select {
     text-align: center;
     height: 30px ;
@@ -275,7 +293,8 @@ select {
     background-size: 25%;
     background-position-x: 90%;
     background-position-y: 50%;
-    padding-right: 10px;
+    padding-right: 15px;
+    padding-left: 5px;
     border-radius: 0; 
     @include fontSize(16);
     color: white;
@@ -371,6 +390,7 @@ select {
         h3{
             @include fontSize(16);
             font-weight: lighter;
+            line-height: 1.5;
           }
         button{
             position:absolute;
@@ -393,15 +413,6 @@ select {
     }
 }
 
-.userImage{
-    position:absolute;
-    top:18px;
-    right:180px;
-    transition:all 0.2s ease-in-out;
-    &:hover{
-        transform:scale(1.2);
-    }
-}
 
 .mapBottom {
   background: linear-gradient(to bottom right, $orange, $yellow, $beige);
@@ -411,11 +422,14 @@ select {
     padding-top: 20px;
     text-align: left;
     text-decoration: none;
+    text-align: center;
+    list-style: none;
+    padding: 0;
+    padding-top: 15px;
+    line-height: 1.5;
     @include fontSize(16);
   }
 }
-
-
 
 
 

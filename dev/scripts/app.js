@@ -246,7 +246,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="wrapper">
                 <div className="wrapper">
                 
                     <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
@@ -267,17 +267,20 @@ class App extends React.Component {
                                 <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
                                 <Route path='/SavedRuns' render={() => 
                                 <SavedRuns userId={this.state.user.id} />} />
-                              
-                                <div className="datePicker">
-                                    <h2>Run Date</h2>
-                                    <DatePicker
-                                        onChange={this.onChange}
-                                        value={this.state.date}
-                                    />
+
+                                <div className="sideBar">
+                                    <div className="datePicker">
+                                        <h2>Run Date</h2>
+                                        <DatePicker
+                                            onChange={this.onChange}
+                                            value={this.state.date}
+                                            />
+                                    </div>
+                                    
+                                    <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
+                                    <p className="or">or</p>
+                                    <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
                                 </div>
-                                <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
-                                <p className="or">or</p>
-                                <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
 
                                 <Route path='/Sunrise' render={() =>
                                 <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} date={this.state.userDate}runDataPush={this.runDataPush} />} />

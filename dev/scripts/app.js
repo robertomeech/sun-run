@@ -140,17 +140,14 @@ class App extends React.Component {
 
             });
         }
-        console.log("success")
     }
 
     runDataPush(runs) {
-        let userId = this.state.user.id
-        console.log(userId)
-        console.log(runs)
-        firebase.database().ref('users/' + userId + '/userRuns/').push({
-            run: runs,
-            user: userId
-        })
+      let userId = this.state.user.id
+      firebase.database().ref('users/' + userId + '/userRuns/').push({
+        run: runs,
+        user: userId
+      })      
     }
 
     componentDidMount() {
@@ -165,68 +162,60 @@ class App extends React.Component {
                 //Add value listener to user node in database
                 dbRefUser.on('value', (snapshot) => {
                     if (snapshot.exists()) {
-                        let loggedInUser = snapshot.val();
-                        this.setState({
-                            loggedIn: true,
-                            user: loggedInUser,
-                            userImage: user.photoURL
-                        });
-                        this.dbRefUser = dbRefUser;
-                    } else { //if the user does not already exist in the database- create them
-                        console.log('new user created');
-                        const loggedInUser = {
-                            id: user.uid,
-                            name: user.displayName,
-                            photo: user.photoURL,
-                        }
-                        this.setState({
-                            loggedIn: true,
-                            user: loggedInUser
-                        })
-                        dbRefUser.set(loggedInUser);
-                    }
-                });
-            } else { //user is logging out
-                console.log(`auth change log out`)
-                this.setState({
-                    loggedIn: false,
-                    user: null
-                });
-                //Remove the value event listener
-                if (this.dbRefUser) {
-                    this.dbRefUser.off();
-                }
-            }//end of else statement
-        })
+                      let loggedInUser = snapshot.val();
+                      this.setState({
+                          loggedIn: true,
+                          user: loggedInUser,
+                          userImage: user.photoURL
+                      });
+                      this.dbRefUser = dbRefUser;
+                  } else { //if the user does not already exist in the database- create them
+                      const loggedInUser = {
+                          id: user.uid,
+                          name: user.displayName,
+                          photo: user.photoURL,
+                      }
+                      this.setState({
+                          loggedIn: true,
+                          user: loggedInUser
+                      })
+                      dbRefUser.set(loggedInUser);
+                  }
+              });
+          } else { //user is logging out
+              this.setState({
+                  loggedIn: false,
+                  user: null
+              });
+              //Remove the value event listener
+              if (this.dbRefUser) {
+                  this.dbRefUser.off();
+              }
+          }//end of else statement
+      })
     }
 
     loginWithGoogle() {
         const provider = new firebase.auth.GoogleAuthProvider();
 
         firebase.auth().signInWithPopup(provider)
-            .then((user) => {
-                console.log(user.user)
-                console.log(user.user.uid)
-                const id = user.user.uid;
-                let userEmail = user.user.email
-                this.setState({
-                    uid: id,
-                    userImage: user.photoURL
-                })
-                userDataPush(user)
-                console.log(userEmail)
-
-
+        .then((user) => {
+            const id = user.user.uid;
+            let userEmail = user.user.email
+            this.setState({
+                uid: id,
+                userImage: user.photoURL
             })
-            .catch((error) => {
-                console.log(error)
-            });
+            userDataPush(user)
+          
+        })
+        .catch((error) => {
+        });
     }
 
     logout() {
         firebase.auth().signOut();
         this.dbRef.off('value');
-        console.log('signed out')
     }
 
     render() {

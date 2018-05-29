@@ -55,11 +55,7 @@ class Sunrise extends React.Component {
         return end.format("H:mm")
     }
 
-    getTimeInterval(sunriseTime, runDuration) {
-        let end = moment(sunriseTime, "HH:mm");
-        end.subtract(runDuration, 'minutes');
-        return end.format("H:mm")
-    }
+
 
     handleClick(){
         this.getLandmark()

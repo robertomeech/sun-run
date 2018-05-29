@@ -59,7 +59,7 @@ class SavedRuns extends React.Component {
                         <div className='shareRun'>
                             <TwitterIcon  className='twitterIcon' size={30} round={true} className="twitterIcon"/>
                             <p>Share Run</p>
-                            <TwitterShareButton className="twitterShare"
+                                <TwitterShareButton className="twitterShare"
                                 size={50} height={100} 
                             />
                         </div>

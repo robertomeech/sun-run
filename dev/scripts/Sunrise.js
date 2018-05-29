@@ -21,6 +21,7 @@ class Sunrise extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     componentDidMount(){
+        // this is just so we can push the date to the map component
         this.setState({
             date:this.props.date
         })
@@ -39,23 +40,21 @@ class Sunrise extends React.Component {
         })
     }
     runData(x,y,z) {
+        // we pass this function to the map component in order to push this data to saved runs
         let runData = {
-            // leaveTime: props.getTimeInterval(props.sunriseTime, durationThree),
             leaveTime: x,
-            // runTime: props.directions && props.directions.routes[0].legs[0].duration.text,
             runTime: y,
             date: z
 
         }
         return runData;
     }
+
     getTimeInterval(sunriseTime, runDuration) {
         let end = moment(sunriseTime, "HH:mm");
         end.subtract(runDuration, 'minutes');
         return end.format("H:mm")
     }
-
-
 
     handleClick(){
         this.getLandmark()

@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase, { auth, provider } from 'firebase';
-
-
+import { TwitterIcon } from 'react-share';
+import { TwitterShareButton } from 'react-share';
 
 class SavedRuns extends React.Component {
     constructor(){
@@ -57,6 +57,13 @@ class SavedRuns extends React.Component {
                         <h3>Date: {run.run.date}</h3>
                         <h3>Time to leave: {run.run.leaveTime}</h3>
                         <h3>Run Duration: {run.run.runTime}</h3>
+                        <div className='shareRun'>
+                            <TwitterIcon  className='twitterIcon' size={30} round={true} className="twitterIcon"/>
+                            <p>Share Run</p>
+                            <TwitterShareButton className="twitterShare"
+                                    size={50} height={100} url={`www.google.ca`}
+                            />
+                        </div>
                     </div>
 
                     )

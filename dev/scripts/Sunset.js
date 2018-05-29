@@ -11,9 +11,7 @@ class Sunset extends React.Component {
         super();
         this.state = {
             runDuration:'',
-
-            time: new Date(),
-
+            time: new Date()
             }
     this.runDurationChange = this.runDurationChange.bind(this)
     }
@@ -41,6 +39,8 @@ class Sunset extends React.Component {
 
     
     render() {
+
+
         
         return (
             <div className="wrapper">
@@ -63,6 +63,7 @@ class Sunset extends React.Component {
                         <p>Minutes</p>
                     </div>
                     <p>You need to leave by {this.getTimeInterval()}PM</p>
+
                     <h3>Countdown to tonights sunset</h3>
                     <h4>
                         {this.props.sunsetDate ? <RNMomentCountDown className="countdown" toDate={this.props.sunsetDate + this.props.largeSunsetTime} sourceFormatMask='MM-DD-YYYY HH:mm:ss' /> : null}

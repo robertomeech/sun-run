@@ -8,10 +8,7 @@ import axios from 'axios';
 import firebase, {auth, provider} from 'firebase';
 import SavedRuns from './SavedRuns.js';
 import moment from 'moment';
-<<<<<<< HEAD
-=======
 import Footer from './Footer.js'
->>>>>>> abb42f0e7b3ce14caa4d676e71b62bc51197b380
 
 
 // Initialize Firebase

@@ -253,7 +253,7 @@ class App extends React.Component {
                     {this.state.loggedIn===true ? 
                         <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
                     <h1>Sun Run</h1>
-                    <img src="../../images/sun.svg" className="sunImage" alt=""/>
+                    <img src="../../images/sun.svg" className="sunImage" alt="A big yellow sun icon behind the title."/>
                     {this.state.loggedIn === false && 
                         <div>
                             <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can select a chosen destination to watch the beautiful sunrise. Choose a date to get started!</p>
@@ -264,7 +264,7 @@ class App extends React.Component {
                         
                         <Router className="section stylings">
                             <div className="transformInline">
-                                <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
+                                <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="Google Profile image of the user is shown" /></Link>
                                 <Route path='/SavedRuns' render={() => 
                                 <SavedRuns userId={this.state.user.id} />} />
 

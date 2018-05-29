@@ -46,7 +46,7 @@ class Sunset extends React.Component {
             <div className="wrapper">
                 <div className="sunsetSection wrapper">
                     <h2 className="sunsetHeader">Sunset</h2>
-                    <img className="sunsetIMG" src="../../images/sunset.svg" alt=""/>
+                    <img className="sunsetIMG" src="../../images/sunset.svg" alt="A white sunset icon."/>
                     <p>The Sunset will be at {this.props.sunsetTime}</p>
                     <h2>Run Duration</h2>
                     <div className="transformInline">

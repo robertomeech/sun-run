@@ -4,14 +4,12 @@
 // global styles
 
 body {
-    font-family: $body;
-// background: $pink;
-    color: white;
-//   background: linear-gradient(to left, $orange, $yellow, $beige);
-    background:skyblue;
-    background-repeat: none;
-    overflow-x:hidden;
-    width:100%;
+  font-family: $body;
+  color: white;
+  background:skyblue;
+  background-repeat: none;
+  overflow-x:hidden;
+  width:100%;
 }
 
 h1, h2, h3, h4 {
@@ -20,10 +18,8 @@ h1, h2, h3, h4 {
 }
 
 h2 {
-  // text-transform: uppercase;
   @include fontSize(20);
   letter-spacing: 1px;
-  // border-bottom: 1px solid 
 }
 
 p {
@@ -32,14 +28,14 @@ p {
   text-align:center;
 }
 .introP{
-    margin:100px auto;
-    width:60%;
-    padding-top: 100px;
-    @media(max-width: 790px) {
-      width: 80%;
-      padding-top: 0;
-      margin: 50px auto;
-    }
+  margin:100px auto;
+  width:60%;
+  padding-top: 100px;
+  @media(max-width: 790px) {
+    width: 80%;
+    padding-top: 0;
+    margin: 50px auto;
+  }
 }
 
 
@@ -61,15 +57,15 @@ h1 {
 }
 
 .sunImage{
-    position:absolute;
-    left:100px;
-    top:-100px;
-    height:400px;
-    fill:white;
-    z-index:-100;
-    @media(max-width:706px){
-        left:-10px;
-    }
+  position:absolute;
+  left:100px;
+  top:-100px;
+  height:400px;
+  fill:white;
+  z-index:-100;
+  @media(max-width:706px){
+    left:-10px;
+  }
 
 }
 
@@ -80,7 +76,7 @@ h1 {
   margin: 0 auto;
   margin-top: 20px;
   @media(max-width:600px){
-      width:100%;
+    width:100%;
   }
 }
 
@@ -115,11 +111,12 @@ h1 {
     background: linear-gradient(to right, rgba(241,231,103,1) 0%, rgb(255, 109, 0)100%);
   }
 }
+
 .signInButton{
-    float:none;
-    position:relative;
-    left:50%;
-    transform:translateX(-50%);
+  float:none;
+  position:relative;
+  left:50%;
+  transform:translateX(-50%);
 }
 
 .transformInline > * {
@@ -140,7 +137,7 @@ h1 {
   right:180px;
   transition:all 0.2s ease-in-out;
   &:hover{
-      transform:scale(1.2);
+    transform:scale(1.2);
   }
 }
 
@@ -152,7 +149,6 @@ h1 {
   margin: 0 auto;
   text-align: center;
   margin-bottom: 20px;
-//   background:black;
   h2 {
     margin-bottom: 10px;
     margin-top: 50px;
@@ -175,7 +171,6 @@ h1 {
   width:200px;
   margin:0 auto;
   position:relative;
-  
 }
 
 .sunriseLink {
@@ -189,11 +184,11 @@ h1 {
   box-shadow: (0,0,0,0.5);
   margin-bottom: 10px;
   
-  img{
+  img {
     height:40px;
     fill:white;
   }
-  &:hover{
+  &:hover {
     background: linear-gradient(to top right, $beige, $yellow);
     box-shadow: -10px 10px 3.5px 1px rgba(0,0,0,0.67);
     transform: scale(1.05);
@@ -210,8 +205,8 @@ h1 {
   transition: all 0.15s ease-in-out;
   margin-top: 10px;
   img{
-      height:40px;
-      fill:white;
+    height:40px;
+    fill:white;
   }
   &:hover{
     background:linear-gradient(to bottom right, $pink, $orange);
@@ -219,19 +214,20 @@ h1 {
     transform: scale(1.05);
   }
 }
+
 .saveLink {
-    background:$orange;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 5%;
-    border:none;
-    border-radius:20px;
-    padding:10px 30px;
-    color:white;
-    @include fontSize(16);
-    &:hover {
-      background:linear-gradient(to bottom right, $pink, $orange, $yellow);
-    }
+  background:$orange;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 5%;
+  border:none;
+  border-radius:20px;
+  padding:10px 30px;
+  color:white;
+  @include fontSize(16);
+  &:hover {
+    background:linear-gradient(to bottom right, $pink, $orange, $yellow);
+  }
 }
 
 // sunset styles
@@ -240,7 +236,6 @@ h1 {
   font-family: $pacifico;
   margin-top: 50px;
   @include fontSize(90);
-//   text-shadow: makelongshadow($pink); 
   @media(max-width: 350px) {
     @include fontSize (80);
   }
@@ -259,7 +254,7 @@ h1 {
   width:90%;
   margin:0 auto;
   @media(max-width:600px){
-      width:100%;
+    width:100%;
   }
   
   // border: 1px solid white;
@@ -269,7 +264,6 @@ h1 {
   }
   h2 {
     margin-bottom: 20px;
-    // text-transform: uppercase;
     margin-top: 20px;
   }
   h3 {
@@ -290,33 +284,33 @@ h1 {
 }
 
 select {
+  text-align: center;
+  height: 30px ;
+  width: 50px;
+  letter-spacing: 2px;
+  border: 1px solid white;
+  background: $yellow;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('../../images/down-arrow.png') no-repeat;
+  background-size: 25%;
+  background-position-x: 90%;
+  background-position-y: 50%;
+  padding-right: 15px;
+  padding-left: 5px;
+  border-radius: 0; 
+  @include fontSize(16);
+  color: white;
+  margin-right: 5px;
+  margin-left: 5px;
+  option {
     text-align: center;
-    height: 30px ;
-    width: 50px;
-    letter-spacing: 2px;
-    border: 1px solid white;
-    background: $yellow;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: url('../../images/down-arrow.png') no-repeat;
-    background-size: 25%;
-    background-position-x: 90%;
-    background-position-y: 50%;
-    padding-right: 15px;
-    padding-left: 5px;
-    border-radius: 0; 
-    @include fontSize(16);
+    margin: 20px;
+    border-radius: 0;
+    background: $pink;
     color: white;
-    margin-right: 5px;
-    margin-left: 5px;
-    option {
-        text-align: center;
-        margin: 20px;
-        border-radius: 0;
-        background: $pink;
-        color: white;
-        margin:0 auto;        
-    }  
+    margin:0 auto;        
+  }  
 }
 
 // sunrise section styling
@@ -328,15 +322,17 @@ select {
   position:relative;
   width:90%;
   margin:0 auto;
+  @media(max-width:600px){
+   width:100%;
+}
   & .sunriseHeader {
     font-family: $pacifico;
     margin-top: 20px;
     @include fontSize(90);
-    // text-shadow: makelongshadow($yellow); 
     @media(max-width: 350px) {
       @include fontSize (80);
     }
-  }
+}
 
   input {
     border: 1px solid white;
@@ -356,7 +352,6 @@ select {
     @media(max-width: 350px) {
       width: 200px;
       text-align: center;
-
     }
     @media(max-width: 550px) {
       width: 180px;
@@ -383,47 +378,37 @@ select {
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .whatever{
-      background:black;
-      margin-bottom:40px;
-  }
-
-  
 }
 
-.savedRunsContainer{
-    background:$orange;
-    .savedRun{
-        background:$pink;
-        position:relative;
-        padding:15px;
-        width:300px;
-        margin:15px auto;
-        border-radius:10px;
-        h3{
-            @include fontSize(16);
-            font-weight: lighter;
-            line-height: 1.5;
+.savedRunsContainer {
+  background:$orange;
+  .savedRun {
+    background:$pink;
+    position:relative;
+    padding:15px;
+    width:300px;
+    margin:15px auto;
+    border-radius:10px;
+    h3 {
+        @include fontSize(16);
+        font-weight: lighter;
+        line-height: 1.5;
+      }
+    button{
+      position:absolute;
+      top:10px;
+      right:10px;
+      background:none;
+      border:none;
+      .x {
+          height:20px;
+          transition:all 0.3s ease-in-out;
+          &:hover{
+            transform:rotate(90deg);
           }
-        button{
-            position:absolute;
-            top:10px;
-            right:10px;
-            background:none;
-            border:none;
-
-            .x{
-                height:20px;
-                transition:all 0.3s ease-in-out;
-                &:hover{
-                    transform:rotate(90deg);
-
-    
-                }
-            }
-           
         }
     }
+  }
 }
 
 
@@ -448,18 +433,7 @@ select {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-// date picker styling 
+// date picker PLUGIN styling 
 
 .react-date-picker {
   display: inline-flex;
@@ -479,7 +453,6 @@ select {
   box-sizing: border-box;
 }
 .react-date-picker--disabled {
-  // background-color: #f0f0f0;
   color: #6d6d6d;
 }
 .react-date-picker__button {

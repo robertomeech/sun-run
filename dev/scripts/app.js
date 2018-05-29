@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
-import{BrowserRouter as Router, Route, Link, } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, } from 'react-router-dom';
 import Sunrise from './Sunrise.js';
 import Sunset from './Sunset.js';
 import axios from 'axios';
@@ -13,14 +13,15 @@ import Footer from './Footer.js'
 
 // Initialize Firebase
 const config = {
-  apiKey: "AIzaSyCHcaafweVL2ZQVgM4zN1kFjEuIykBw7yQ",
-  authDomain: "sunrisesunset-1527022043864.firebaseapp.com",
-  databaseURL: "https://sunrisesunset-1527022043864.firebaseio.com",
-  projectId: "sunrisesunset-1527022043864",
-  storageBucket: "sunrisesunset-1527022043864.appspot.com",
-  messagingSenderId: "59111531936"
+    apiKey: "AIzaSyCHcaafweVL2ZQVgM4zN1kFjEuIykBw7yQ",
+    authDomain: "sunrisesunset-1527022043864.firebaseapp.com",
+    databaseURL: "https://sunrisesunset-1527022043864.firebaseio.com",
+    projectId: "sunrisesunset-1527022043864",
+    storageBucket: "sunrisesunset-1527022043864.appspot.com",
+    messagingSenderId: "59111531936"
 };
 firebase.initializeApp(config);
+
 
 
 class App extends React.Component {
@@ -53,17 +54,18 @@ class App extends React.Component {
     }
 
     onChange(dateClicked) {
-      
-      this.setState({
-        date: dateClicked,
-      })
-      this.getAxios();
+
+        this.setState({
+            date: dateClicked,
+        })
+        console.log(dateClicked)
+        this.getAxios()
     }
 
     handleChange(e, field) {
-      const newState = Object.assign({}, this.state);
-      newState[field] = e.target.value;
-      this.setState(newState);
+        const newState = Object.assign({}, this.state);
+        newState[field] = e.target.value;
+        this.setState(newState);
     }
 
     getAxios(){
@@ -116,19 +118,21 @@ class App extends React.Component {
             userDate: month + '-' + day + '-' + year
           })
         })
+            
+        
     }
 
     success(position) {
-      let latitude = position.coords.latitude;
-      let longitude = position.coords.longitude;
-      this.setState({
-        latitude: latitude,
-        longitude: longitude
-      })
-      this.getAxios();
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+        this.setState({
+            latitude: latitude,
+            longitude: longitude
+        })
+        this.getAxios();
     }
 
-    userDataPush(user){
+    userDataPush(user) {
         var database = firebase.database();
         function writeUserData(userId, name, email, imageUrl) {
             firebase.database().ref('users/' + userId).set({
@@ -147,11 +151,11 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        
+
         navigator.geolocation.getCurrentPosition(this.success);
         this.dbRef = firebase.database().ref()
-        
-        
+
+
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
                 let dbRefUser = firebase.database().ref('users/' + user.uid);
@@ -190,10 +194,10 @@ class App extends React.Component {
           }//end of else statement
       })
     }
-    
-    loginWithGoogle(){
+
+    loginWithGoogle() {
         const provider = new firebase.auth.GoogleAuthProvider();
-        
+
         firebase.auth().signInWithPopup(provider)
         .then((user) => {
             const id = user.user.uid;
@@ -209,7 +213,7 @@ class App extends React.Component {
         });
     }
 
-    logout(){
+    logout() {
         firebase.auth().signOut();
         this.dbRef.off('value');
     }
@@ -218,22 +222,22 @@ class App extends React.Component {
         return (
             <div className="wrapper">
                 <div className="wrapper">
-                    <img className="clouds" src="../../images/clouds.svg" alt="three clouds"/>
+                    <img className="clouds" src="../../images/clouds.svg" alt="three clouds" />
 
 
                     {/* if user is logged in, signout button is displayed */}
-                    {this.state.loggedIn===true ? 
-                        <button className="signInOutButton"onClick={this.logout}>Sign Out</button> : null}
+                    {this.state.loggedIn === true ?
+                        <button className="signInOutButton" onClick={this.logout}>Sign Out</button> : null}
 
                     <h1>Sun Run</h1>
-                    <img src="../../images/sun.svg" className="sunImage" alt=""/>
+                    <img src="../../images/sun.svg" className="sunImage" alt="" />
 
 
                     {/* displays a blurb about the app before the user signs in */}
-                    {this.state.loggedIn === false && 
+                    {this.state.loggedIn === false &&
                         <div>
                             <p className="introP">Sun Run is an app that allows you to schedule your runs so that you are home before sunset or can select a chosen destination to watch the beautiful sunrise. Choose a date to get started!</p>
-                            <button className="signInOutButton signInButton"onClick={this.loginWithGoogle}>Login with Google</button>
+                            <button className="signInOutButton signInButton" onClick={this.loginWithGoogle}>Login with Google</button>
                         </div>
                     }
 
@@ -242,8 +246,8 @@ class App extends React.Component {
                         <Router className="section stylings">
                             <div className="transformInline">
                                 <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="Google Profile image of the user is shown" /></Link>
-                                <Route path='/SavedRuns' render={() => 
-                                <SavedRuns userId={this.state.user.id} />} />
+                                <Route path='/SavedRuns' render={() =>
+                                    <SavedRuns userId={this.state.user.id} />} />
 
                                 {/* the sideBar contains the date picker and our two buttons to select run time */}
                                 <div className="sideBar">
@@ -252,21 +256,21 @@ class App extends React.Component {
                                         <DatePicker
                                             onChange={this.onChange}
                                             value={this.state.date}
-                                            />
+                                        />
                                     </div>
-                                    
+
                                     <Link className="sunriseLink" to='/Sunrise'>  Sunrise</Link>
                                     <p className="or">or</p>
                                     <Link className="sunsetLink" to='/Sunset'>  Sunset</Link>
                                 </div>
 
                                 <Route path='/Sunrise' render={() =>
-                                <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} date={this.state.userDate}runDataPush={this.runDataPush} />} />
+                                    <Sunrise sunriseTime={this.state.sunriseTime} lat={this.state.latitude} long={this.state.longitude} date={this.state.userDate} runDataPush={this.runDataPush} />} />
 
                                 <div className="testingbackground">
-                                <Route path='/Sunset' render={() =>
-                                <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} userImage={this.state.userImage} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush}/>
-                                }/>
+                                    <Route path='/Sunset' render={() =>
+                                        <Sunset sunsetDate={this.state.userDate} sunsetTime={this.state.sunsetTime} userImage={this.state.userImage} largeSunsetTime={this.state.correctSunset} runDataPush={this.runDataPush} />
+                                    } />
                                 </div>
 
                             </div>

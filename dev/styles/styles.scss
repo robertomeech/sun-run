@@ -368,6 +368,10 @@ select {
         width:300px;
         margin:15px auto;
         border-radius:10px;
+        h3{
+            @include fontSize(16);
+            font-weight: lighter;
+          }
         button{
             position:absolute;
             top:10px;
@@ -384,9 +388,7 @@ select {
     
                 }
             }
-            h3{
-                font-size:20px;
-            }
+           
         }
     }
 }
@@ -405,7 +407,6 @@ select {
   background: linear-gradient(to bottom right, $orange, $yellow, $beige);
   position: relative;
   bottom: 20px;
-  z-index: -1;
   ul {
     padding-top: 20px;
     text-align: left;

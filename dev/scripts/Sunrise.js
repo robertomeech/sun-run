@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsRenderer} from 'react-google-maps';
+// import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsRenderer} from 'react-google-maps';
 import{compose, withProps, lifecycle} from 'recompose';
 import MapWithADirectionsRenderer from './Map.js';
 import moment from 'moment';

@@ -270,7 +270,7 @@ class App extends React.Component {
                     {this.state.loggedIn === true && <div>
                         <Router className="section stylings">
                             <div className="transformInline">
-                                <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="" /></Link>
+                                <Link className='userImage' to='/SavedRuns'> <img className='userIMG' src={this.state.userImage} alt="Google Profile image of the user is shown" /></Link>
                                 <Route path='/SavedRuns' render={() => 
                                 <SavedRuns userId={this.state.user.id} />} />
 

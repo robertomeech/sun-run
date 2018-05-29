@@ -19,7 +19,6 @@ class SavedRuns extends React.Component {
         const dbRef = firebase.database().ref('users/' + this.props.userId + '/userRuns/');
         dbRef.on('value', (snapshot) => {
             const data = snapshot.val();
-            console.log(data)
 
             const savedRun = [];
 
@@ -61,7 +60,7 @@ class SavedRuns extends React.Component {
                             <TwitterIcon  className='twitterIcon' size={30} round={true} className="twitterIcon"/>
                             <p>Share Run</p>
                             <TwitterShareButton className="twitterShare"
-                                    size={50} height={100} url={`www.google.ca`}
+                                size={50} height={100} 
                             />
                         </div>
                     </div>

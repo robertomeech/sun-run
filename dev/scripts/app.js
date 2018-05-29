@@ -136,13 +136,10 @@ class App extends React.Component {
 
             });
         }
-        console.log("success")
     }
 
     runDataPush(runs) {
       let userId = this.state.user.id
-      console.log(userId)
-      console.log(runs)
       firebase.database().ref('users/' + userId + '/userRuns/').push({
         run: runs,
         user: userId
@@ -169,7 +166,6 @@ class App extends React.Component {
                       });
                       this.dbRefUser = dbRefUser;
                   } else { //if the user does not already exist in the database- create them
-                      console.log('new user created');
                       const loggedInUser = {
                           id: user.uid,
                           name: user.displayName,
@@ -183,7 +179,6 @@ class App extends React.Component {
                   }
               });
           } else { //user is logging out
-              console.log(`auth change log out`)
               this.setState({
                   loggedIn: false,
                   user: null
@@ -201,8 +196,6 @@ class App extends React.Component {
         
         firebase.auth().signInWithPopup(provider)
         .then((user) => {
-            console.log(user.user)
-            console.log(user.user.uid)
             const id = user.user.uid;
             let userEmail = user.user.email
             this.setState({
@@ -210,19 +203,15 @@ class App extends React.Component {
                 userImage: user.photoURL
             })
             userDataPush(user)
-            console.log(userEmail)
-            
-
+          
         })
         .catch((error) => {
-            console.log(error)
         });
     }
 
     logout(){
         firebase.auth().signOut();
         this.dbRef.off('value');
-        console.log('signed out')
     }
 
     render() {

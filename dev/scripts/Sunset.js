@@ -36,12 +36,9 @@ class Sunset extends React.Component {
         }
         return runData;
     }
-
     
     render() {
-
-
-        
+ 
         return (
             <div className="wrapper">
                 <div className="sunsetSection wrapper">
